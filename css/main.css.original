@@ -16,7 +16,7 @@ body {
   background-color: #FFF;
   font: 13.34px Helvetica, Arial, sans-serif;
   font-size: small;
-  text-align: left;
+  text-align: center;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -73,7 +73,20 @@ ul.posts span {
   margin-bottom: 2em;
 }
 
+.site .header h1.title a {
+  color: #a00;
+}
+
 .site .header h1.title a:hover {
+  color: #000;
+}
+
+.site .header a.extra {
+  color: #aaa;
+  margin-left: 1em;
+}
+
+.site .header a.extra:hover {
   color: #000;
 }
 
@@ -84,6 +97,7 @@ ul.posts span {
 .site .footer {
   font-size: 80%;
   color: #666;
+  border-top: 4px solid #eee;
   margin-top: 2em;
   overflow: hidden;
 }
@@ -144,55 +158,3 @@ ul.posts span {
 .post pre.terminal code {
   background-color: #333;
 }
-
-/*****************************************************************************/
-/*
-/* EarthWandering
-/*
-/*****************************************************************************/
-
-.tagline {
-	display: none;
-}
-
-body {
-background-image:url('http://farm8.staticflickr.com/7319/9520905456_91f1b44f0a_z.jpg');
-background-repeat:no-repeat;
-background-color:#000000;
-}
-
-.site {
-margin-left: 220px;
-}
-
-.header h1 {
- font-size: 30px;
- margin: 0px 0px 0px 0px !important;
- color: #FFFFFF;
- 
-}
-
-.header {
- margin: 0px 0px 15px 0px;
-}
-
-.header h2 {
- font-size: 15px;
- color: #FFFFFF;
- font-decoration: none;
-}
-
-.header a:link, 
-.header a:visited,
-.header a:hover {
- 	color: #FFFFFF !important;
-	font-decoration: none !important;
-}
-
-#home,
-.post {
-	background-color: #FFFFFF;
-	padding: 15px !important;
-}
-
-

@@ -12,30 +12,77 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/main.css">
 
+		<script src="/js/jquery-1.10.2.min.js"></script>
+		<!-- Consider for later
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>		
+		-->
+				
+		<script type="text/javascript">
+		$(document).ready(function() {
+			set_tagline();
+			//setTimeout("roll_tagline()", 2000);
+		});
+				
+		function set_tagline() {
+			//alert("set tag");
+			var tags = $(".tagline");
+			console.log(tags);
+			var tag = tags[Math.floor(Math.random()*tags.length)];
+			if (tag) {
+				$(tag).show();
+			}
+		}
+		
+		function roll_tagline() {
+			//alert("roll");
+			$(".tagline").hide();
+			//$(".tagline").each(function(tag) {
+			//	alert(tag);
+			//});
+			set_tagline();
+		}
+		
+		
+		
+		</script>
+
     </head>
     <body>
 
-        <div class="container">
+        <div class="container">        
+        
           <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-              <a class="extra" href="/">home</a>
-            </div>
+			<div class="header">
+			  <h1 class="title"><a href="/">{{ site.name }}</a></h1>
+			  <h2>
+			  A Blog About Bicycle Touring And
+		  
+			  <span class="tagline" id="tl1">Ninja Camping</span>
+			  <span class="tagline" id="tl2">Living Free</span>
+			  <span class="tagline" id="tl3">Fancy Ramen Cooking</span>
+			  <span class="tagline" id="tl4">Foraging</span>
+			  <span class="tagline" id="tl5">Eating Squirrel</span>
+		  
+	<!--
+			  <span class="tagline" id="tl"></span>
+	-->              
+			  </h2>
+			</div>
 
                 {{ content }}
 
             <div class="footer">
               <div class="contact">
                 <p>
-                  Your Name<br />
-                  What You Are<br />
-                  your@email.com
+                  EarthWandering.com<br />
                 </p>
               </div>
               <div class="contact">
                 <p>
-                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
-                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                  Contact 
+                  <a href="http://www.google.com/recaptcha/mailhide/d?k=01CPGpgEmNlMYzqlAQ8a-A5A==&c=iUkClmL65GdYui__CFnPPoGHyUyK-pLDA6MVL3p_dqg=">Jon</a> 
+                  or 
+                  <a href="http://www.google.com/recaptcha/mailhide/d?k=01CPGpgEmNlMYzqlAQ8a-A5A==&c=ExUYGkadfJvDvDX6rDDe90Z9iqSMHoyuW0dpkof_WbU=">Steph</a>
                 </p>
               </div>
             </div>

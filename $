@@ -1,0 +1,14 @@
+---
+layout: default
+title: Earth Wandering A Blog About Bikes and Dumpsters
+---
+
+<div id="home">
+  <h1>Earth Wandering</h1>
+
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
