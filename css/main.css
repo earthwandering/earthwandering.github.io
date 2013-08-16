@@ -195,4 +195,18 @@ margin-left: 220px;
 	padding: 15px !important;
 }
 
+.left_photo {
+	float: left;
+	margin: 5px;
+}
+
+.right_photo {
+	float: right;
+	margin: 5px;
+}
+
+.big_start {
+	font-size: 1.5em;
+	font-decoration: bold;
+}
 
