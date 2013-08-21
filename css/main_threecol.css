@@ -155,12 +155,6 @@ ul.posts span {
 	display: none;
 }
 
-body {
-background-image:url('http://farm8.staticflickr.com/7319/9520905456_91f1b44f0a_z.jpg');
-background-repeat:no-repeat;
-background-color:#000000;
-}
-
 .site {
 margin-left: 220px;
 }
@@ -168,24 +162,31 @@ margin-left: 220px;
 .header h1 {
  font-size: 30px;
  margin: 0px 0px 0px 0px !important;
- color: #FFFFFF;
+ color: #000000;
  
 }
 
-.header {
- margin: 0px 0px 15px 0px;
+#header {
+ margin: 0px 0px 0px 0px;
+ padding: 5px;
 }
+
+#footer {
+ margin: 0px 0px 0px 0px;
+ padding: 5px;
+}
+
 
 .header h2 {
  font-size: 15px;
- color: #FFFFFF;
+ color: #000000;
  font-decoration: none;
 }
 
 .header a:link, 
 .header a:visited,
 .header a:hover {
- 	color: #FFFFFF !important;
+ 	color: #000000 !important;
 	font-decoration: none !important;
 }
 
@@ -231,5 +232,56 @@ margin-left: 220px;
 
 .post_preview_pic img {
 	max-width: 175px;
+	min-width: 175px;
 }
+
+
+
+/*****************************************************************************/
+/*
+/* Three Col from http://alistapart.com/article/holygrail
+/*
+/*****************************************************************************/
+
+
+body {
+  min-width: 550px !important;      /* 2x LC width + RC width */
+}
+
+#container {
+  padding-left: 200px;   /* LC width */
+  padding-right: 150px;  /* RC width */
+}
+
+#container .column {
+  position: relative;
+  float: left;
+}
+
+#center {
+  width: 100%;
+}
+
+#left {
+  width: 200px;          /* LC width */
+  right: 200px;          /* LC width */
+  margin-left: -100%;
+}
+
+#right {
+  width: 150px;          /* RC width */
+  margin-right: -150px;  /* RC width */
+}
+
+#footer {
+  clear: both;
+}
+
+/*** IE6 Fix ***/
+* html #left {
+  left: 150px;           /* RC width */
+}
+
+
+
 
