@@ -76,20 +76,28 @@ $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?id=100330886@N
 	<span class="tagline" id="tl"></span>
 	-->              
 	</h2>
-	<h2>
-		<a href="http://www.flickr.com/photos/100330886@N04/">Earth Wandering on Flickr</a>
-	</h2>
+	<div id="navbar">
+		<a href="http://www.flickr.com/photos/100330886@N04/">Flickr</a>
+	</div>
 </div>
 <div id="container">
   <div id="center" class="column">
-		{{ content }}
+
+	<!-- AddThis Button BEGIN -->
+	<div class="addthis_toolbox addthis_default_style">
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-521681f21088017e"></script>
+	<!-- AddThis Button END -->
+  
+	{{ content }}
   </div>
   <div id="left" class="column">
+
   
-  	<!-- banana toss! -->
-  	<!--
-  	<img src="http://farm8.staticflickr.com/7319/9520905456_91f1b44f0a_z.jpg" />
-  	-->
   </div>
   <div id="right" class="column">
 		<script type="text/javascript"><!--
