@@ -167,19 +167,40 @@ margin-left: 220px;
 }
 
 #header {
- margin: 0px 0px 0px 0px;
- padding: 5px;
+ margin: 0px;
+ padding: 0px;
  //background-image: url('/assets/banner.jpg');
  //height: 200px;
 }
 
 #header a:link, 
 #header a:visited,
-#header a:hover {
- 	color: #000000 !important;
-	font-decoration: none !important;
+#header a:hover,
+#header a:active {
+ 	color: #000000;
+	text-decoration: none;
 }
 
+#navbar {
+	background-color: #000000;
+	color: #FFFFFF;
+	padding: 5px;
+	
+}
+
+#navbar a:link, 
+#navbar a:visited,
+#navbar a:hover,
+#navbar a:active {
+ 	color: #FFFFFF;
+	text-decoration: bold;
+	font-size: .8em;
+}
+
+#social_links {
+	height: 15px;
+	padding: 5px;
+}
 
 #footer {
  margin: 0px 0px 0px 0px;
@@ -206,6 +227,12 @@ margin-left: 220px;
 
 .right_photo {
 	float: right;
+	margin: 5px;
+}
+
+.photo {
+	display: block;
+	clear: both;
 	margin: 5px;
 }
 
@@ -262,12 +289,12 @@ padding: 0 0 0.5em 0;
 
 
 body {
-  min-width: 550px !important;      /* 2x LC width + RC width */
+  min-width: 380px !important;      /* 2x LC width + RC width, start 550px */
 }
 
 #container {
-  padding-left: 200px;   /* LC width */
-  padding-right: 150px;  /* RC width */
+  padding-left: 50px;   /* LC width, start 200px */
+  padding-right: 180px;  /* RC width, start 150px */
 }
 
 #container .column {
@@ -277,17 +304,18 @@ body {
 
 #center {
   width: 100%;
+  min-width: 300px;
 }
 
 #left {
-  width: 200px;          /* LC width */
-  right: 200px;          /* LC width */
+  width: 50px;          /* LC width */
+  right: 50px;          /* LC width */
   margin-left: -100%;
 }
 
 #right {
-  width: 150px;          /* RC width */
-  margin-right: -150px;  /* RC width */
+  width: 180px;          /* RC width */
+  margin-right: -180px;  /* RC width */
 }
 
 #footer {
@@ -296,7 +324,7 @@ body {
 
 /*** IE6 Fix ***/
 * html #left {
-  left: 150px;           /* RC width */
+  left: 180px;           /* RC width */
 }
 
 
