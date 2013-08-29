@@ -1,31 +1,29 @@
 ---
-layout: threecol
+layout: jumbotron
 title: Earth Wandering
 ---
 
+<!-- old...  layout: threecol -->
 <!-- old...  layout: default -->
-<div id="home">
 
+{% for post in site.posts %}
+<div class="col-lg-3">
 
-  <ul class="posts">
-    {% for post in site.posts %}
-    <li class="post_preview">
-    	<div class="post_preview">
-			<div class="post_preview_pic">
-				{% if post.mainpic != "" %}
-					<a href="{{ post.url }}">
-						<img class="photo_pvw" src="{{ post.mainpic }}" />
-					</a>
-				{% endif %}
-			</div>
-			<div class="post_preview_text">
-				<a href="{{ post.url }}">{{ post.title }}</a>
-				<div class="post_detail">{{ post.date | date_to_string }} (<a href="{{ post.url }}#disqus_thread"></a>)</div>
-				{{ post.excerpt }}<a href="{{ post.url }}">...</a>
-			</div>
+	<h2>{{ post.title }}</h2>
+	<p>
+		{% if post.mainpic != "" %}
+			<a href="{{ post.url }}">
+				<img class="photo_pvw" src="{{ post.mainpic }}" />
+			</a>
+		{% endif %}
+
+		<div class="post_detail">
+			{{ post.date | date_to_string }} (<a href="{{ post.url }}#disqus_thread"></a>)
 		</div>
-    </li>
-    {% endfor %}
-  </ul>
+		{{ post.excerpt }}
+	</p>
+	<p><a class="btn btn-default" href="{{ post.url }}">read &raquo;</a></p>
 </div>
+{% endfor %}
+
 
