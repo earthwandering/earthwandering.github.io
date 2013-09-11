@@ -6,3 +6,15 @@
 	height: 15px;
 	padding: 5px;
 }
+
+.container {
+	max-width: 970px;
+}
+
+/*
+div.jumbotron {
+	background-image: url('http://farm6.staticflickr.com/5525/9625205406_1989d35759_o.jpg');
+	background-repeat: no-repeat;
+	background-postion: right bottom;
+}
+*/
