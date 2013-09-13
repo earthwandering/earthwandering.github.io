@@ -43,7 +43,24 @@ function getOptionData() {
 		includeimg: ($("#input_includeimg").attr('checked') == 'checked'),
 		imgclass: $("#input_imgclass").val(),
 		includelink: ($("#input_includelink").attr('checked') == 'checked'),
-		linkclass: $("#input_linkclass").val(),	
+		linkclass: $("#input_linkclass").val(),
+		showsetpreview: ($("#input_showsetpreview").attr('checked') == 'checked')	
+	};
+	
+	pagelog.append("Option Data: " + JSON.stringify(optiondata) + "\n");
+	
+	return optiondata;
+}
+
+function getPreviewOptionData() {
+	var optiondata = {
+		user: getUserId(),
+		size: "s",
+		includeimg: true,
+		imgclass: "previewphoto",
+		includelink: true,
+		linkclass: "previewlink",
+		showsetpreview: true	
 	};
 	
 	pagelog.append("Option Data: " + JSON.stringify(optiondata) + "\n");
@@ -89,23 +106,43 @@ function loadPhotosetPhotos(photosetid) {
 	pagelog.append("photos (set:" + photosetid + ")\n");
 	
 	var optiondata = getOptionData();
-		
+	var previewoptiondata = getPreviewOptionData();
+
 	var setspan = $('#setspan' + photosetid)
-	setspan.html('<pre id="setpre' + photosetid + '"></pre>');
+	setspan.html("");
+	
+	if (optiondata.showsetpreview) {
+		setspan.append('<div id="setpreview' + photosetid + '"></div>');
+	}
+	
+	setspan.append('<pre id="setpre' + photosetid + '"></pre>');
 	
 	$.getJSON(flickrbase, flickrargs, function(data) {		
 		pagelog.append("photos data:" + JSON.stringify(data) + "\n");
 
-		var settarget = $('#setpre' + photosetid)
+		var settarget = $('#setpre' + photosetid);
+		var setpreviewtarget = $('#setpre' + photosetid);
 		
 		$.each(data.photoset.photo, function(index, photodata) {
 			pagelog.append("photo: " + JSON.stringify(photodata) + "\n");
 		
 			settarget.append(getImageHtml(optiondata, photodata, photosetid));
 			settarget.append("\n");
+
+			if (optiondata.showsetpreview) {
+				setpreviewtarget.before(getImagePreviewHtml(previewoptiondata, photodata, photosetid));
+			}
 			
 		});
 	});
+}
+
+function getImagePreviewHtml(optiondata, photodata, photosetid) {
+	var result = getImageHtml(optiondata, photodata, photosetid);
+	result = result.replace(/&gt;/g,">");
+	result = result.replace(/&lt;/g, "<");
+	console.log("preview image link: " + result);
+	return result;
 }
 
 function getImageHtml(optiondata, photodata, photosetid) {
@@ -221,6 +258,12 @@ function clearLog() {
 		<input id="input_linkclass" type="text" value="photolink" size="10" />)
 
 	</div>
+
+	<div>
+		<input id="input_showsetpreview" type="checkbox" checked="checked" />
+		<label for="input_showsetpreview">Show Set Preview</a>
+	</div>
+
 	</fieldset>
 </div>
 
