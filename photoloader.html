@@ -40,11 +40,11 @@ function getOptionData() {
 	var optiondata = {
 		user: getUserId(),
 		size: $("#input_imgsize").val(),
-		includeimg: ($("#input_includeimg").attr('checked') == 'checked'),
+		includeimg: ($("#input_includeimg").is( ":checked" )),
 		imgclass: $("#input_imgclass").val(),
-		includelink: ($("#input_includelink").attr('checked') == 'checked'),
+		includelink: ($("#input_includelink").is( ":checked" )),
 		linkclass: $("#input_linkclass").val(),
-		showsetpreview: ($("#input_showsetpreview").attr('checked') == 'checked')	
+		showsetpreview: ($("#input_showsetpreview").is( ":checked" ))	
 	};
 	
 	pagelog.append("Option Data: " + JSON.stringify(optiondata) + "\n");
