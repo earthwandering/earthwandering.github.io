@@ -87,8 +87,8 @@ function loadPhotosets() {
 			//loadPhotosetPhotos(setdata.id);
 			
 			output.append('<div id="setdiv' + setdata.id + '">')
-			output.append('<input type="button" onclick="loadPhotosetPhotos(\'' + setdata.id + '\')" value="load" />');
-			output.append(setlink)
+			output.append('<input type="button" class="setloadbutton" onclick="loadPhotosetPhotos(\'' + setdata.id + '\')" value="load" />');
+			output.append("<strong>" + setlink + "</strong>");
 			output.append('<span id="setspan' + setdata.id + '"></span>');
 			output.append('</div>');	
 		});
