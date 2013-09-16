@@ -8,6 +8,9 @@ excerpt: Pictures of all my gear and detailed descriptions of all.  Warning-some
 mainpic: http://farm8.staticflickr.com/7355/9591466073_b4db2c4dff_q.jpg
 ---
 
+
+<a class="photo_right" href="http://www.flickr.com/photos/100330886@N04/9618505088/in/set-72157635232920260"><img title="Clothing Pannier Pic - Pre Yellow Jackets" src="http://farm6.staticflickr.com/5461/9618505088_f1d620011b_q.jpg" /></a>
+
 Before leaving on my long bike trip, I looked all over for a good complete touring gear list.  There are some good ones out there, but I noticed that nobody had a pineapple.  So, I decided to create my own pictorial gear list with very specific descriptions and links off to the gear where possible.  This gear has kept me on the road for almost two months at this point.  Some items could be trimmed down still, but I've been pretty pleased with the items I have in different riding and camping situations.  All hail Ortlieb.
 
 The process of capturing all these pictures turned into an adventure in itself.  You'll notice that down around the clothing bag that the background scenery changes.  At this point while asking Steph to take a picture to prove that ALL of my clothing was captured in the pic, she walked up the hill behind me and stepped in a yellow jacket nest.  This ended the project for about two hours and started a separate project covered in this blog post <a href="">Yellow Jacket Disaster Gear Salvage</a>
@@ -16,8 +19,8 @@ I'll start with pictures of the bike loaded up and ready to ride and then go int
 
 **Fully Loaded Bike**
 
-<a href="http://www.flickr.com/photos/100330886@N04/9594249168/in/set-72157635232920260"><img title="Loaded Touring Bike Side View" src="http://farm3.staticflickr.com/2812/9594249168_61b96b3ec3.jpg" /></a>
-<a href="http://www.flickr.com/photos/100330886@N04/9591463703/in/set-72157635232920260"><img title="Loaded Touring Bike Top View" src="http://farm6.staticflickr.com/5511/9591463703_1112a450d6.jpg" /></a>
+<a class="photo" href="http://www.flickr.com/photos/100330886@N04/9594249168/in/set-72157635232920260"><img title="Loaded Touring Bike Side View" src="http://farm3.staticflickr.com/2812/9594249168_61b96b3ec3.jpg" /></a>
+<a class="photo" href="http://www.flickr.com/photos/100330886@N04/9591463703/in/set-72157635232920260"><img title="Loaded Touring Bike Top View" src="http://farm6.staticflickr.com/5511/9591463703_1112a450d6.jpg" /></a>
 
 <ul>
 	<li><a href="http://www.bikepedia.com/quickbike/BikeSpecs.aspx?year=2006&brand=Raleigh&model=Route+1#.UjQbJGQ6VU4">Raleigh Route 1</a> - A cheap, but sturdy bike that has been getting me around since 2006 or so</li>
