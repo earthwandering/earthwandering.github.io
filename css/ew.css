@@ -1,15 +1,35 @@
+
+.jumbotron {
+	background-image: url('http://farm8.staticflickr.com/7392/9778101904_01686ebe4c_b.jpg');
+	background-repeat: no-repeat;
+	background-color: #CCCCCC;
+	background-size: 2000px 200px;
+}
+
+
 .tagline {
 	display: none;
 }
 
 #social_links {
 	height: 15px;
-	padding: 5px;
+	padding: 12px;
 }
 
 .container {
-	max-width: 970px;
+	max-width: 768px;
 }
+
+.post_title, 
+.post_title a {
+font-size: 16px;
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-weight: 500;
+line-height: 1.1;
+color: #000000;
+}
+
+
 
 /*
 div.jumbotron {
