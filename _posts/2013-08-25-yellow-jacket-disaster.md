@@ -4,7 +4,7 @@ title:  "Yellow Jacket Disaster"
 date:   2013-08-25 14:00:00
 categories: gear adventure nudity
 author: Jon
-synopsis: Sometimes you take a joke too far.  Sometimes the joke goes too far AND somebody steps in a yellow jacket nest.
+synopsis: Ever been naked and stung by yellow jackets?
 mainpic: http://farm3.staticflickr.com/2825/9615549611_cf779a9c5d_q.jpg
 ---
 

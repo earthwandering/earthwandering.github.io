@@ -1,11 +1,13 @@
 ---
+featured: true
 layout: post
 title: "Kindness of Strangers"
 date: 2013-08-20 12:00:00
 categories: template
 author: Jon
 mainpic: http://farm8.staticflickr.com/7395/9559271694_b63b64d7c6_q.jpg
-synopsis: One of the most surprising things about traveling by bike...
+featuredsynopsis: One of the most surprising and amazing things about traveling by bike has been experiencing the kindness of strangers.  Even in a friendly place like Portland, Oregon in a normal day to day life it can be rare to experience sincere generosity from somebody unfamiliar to me.  I think even in the presence of generous people if you are in your normal daily routine, the opportunities for interaction, for giving and receiving generosity are more limited than when you are traveling.
+synopsis: The most surprising things about traveling by bike...
 ---
 
 <img class="photo-left" src="http://farm8.staticflickr.com/7395/9559271694_b63b64d7c6.jpg" />
