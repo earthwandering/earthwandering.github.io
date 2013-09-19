@@ -16,7 +16,7 @@ var output = null;
 $(document).ready(function() {
 	pagelog = $("#pagelog");
 	output = $("#output");
-		
+	
 	//pagelog.append("Starting page load\n");
 	//loadPhotosets();
 	//pagelog.append("Done with page load\n");
@@ -151,12 +151,20 @@ function getImageHtml(optiondata, photodata, photosetid) {
 	
 	if (optiondata.includelink) {
 		var flickrUrl = getImageFlickrUrl(optiondata.user, photodata.id, photosetid);
-		html += '&lt;a href="' + flickrUrl + '"&gt;';
+		html += '&lt;a';
+		if (optiondata.linkclass != "") {
+			html += ' class="' + optiondata.linkclass + '"';
+		}
+		html += ' href="' + flickrUrl + '"&gt;';
 	}
 
 	var imageUrl = getImageUrl(optiondata, photodata);
 	if (optiondata.includeimg) {
-		html += '&lt;img title="' + photodata.title + '" src="' + imageUrl + '" /&gt;';
+		html += '&lt;img';
+		if (optiondata.imgclass != "") {
+			html += ' class="' + optiondata.imgclass + '"';
+		}
+		html += ' title="' + photodata.title + '" src="' + imageUrl + '"&gt;';
 	} else {
 		html += imageUrl;
 	}
@@ -215,8 +223,8 @@ function clearLog() {
 
 	<fieldset>
 		<label for="input_flickruserid">Flickr User Id</label>
-		<input id="input_flickruserid" type="text" value="{{page.flickruserid}}" />
-		<input type="button" onclick="getStarted()" value="Load Flickr Sets" />
+		<input id="input_flickruserid" type="text" class="form-control" value="{{page.flickruserid}}" />
+		<input type="button" onclick="getStarted()" value="Load Flickr Sets" class="form-control" />
 	</fieldset>
 </div>
 
@@ -255,7 +263,7 @@ function clearLog() {
 		<label for="input_includelink">Render Link Around Images</a>
 		
 		(<label for="input_linkclass">link class:</label>
-		<input id="input_linkclass" type="text" value="photolink" size="10" />)
+		<input id="input_linkclass" type="text" value="photo-link" size="10" />)
 
 	</div>
 

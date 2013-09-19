@@ -4,38 +4,74 @@
 	background-repeat: no-repeat;
 	background-color: #CCCCCC;
 	background-size: 2000px 200px;
+	
+	margin-bottom: 10px !important;
 }
 
+.post-detail {
+	font-size: .8em;
+	font-weight: bold;
+}
+
+div.ads {
+	margin-bottom: 10px;
+}
+
+.post-box {
+	height: 270px;
+	background-color: #FFFFFF;
+}
+
+.container {
+	max-width: 800px;
+}
+
+.post-synopsis {
+	overflow: hidden;
+}
+
+/*
+
+.col-lg-4 {
+	max-width: 200px;
+}
+*/
 
 .tagline {
 	display: none;
 }
 
-#social_links {
+#social-links {
 	height: 15px;
 	padding: 12px;
 }
 
-.container {
-	max-width: 768px;
-}
-
-.post_title, 
-.post_title a {
-font-size: 16px;
+.post-title, 
+.post-title a,
+.featured-post-title, 
+.featured-post-title a {
+font-size: 1.1em;
 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-weight: 500;
 line-height: 1.1;
 color: #000000;
+margin-top: 10px;
+margin-bottom: 3px;
 }
 
-.photo,
+.featured-post-link {
+	text-align: center;
+	margin: -10px 0 10px 0px !important;
+	padding: 0px;
+	border-bottom: 1px solid #EEEEEE; 
+}
+
+.photo img,
 img.photo,
-.photo_left,
-img.photo_left,
-.photo_right,
-img.photo_right
-{
+.photo-left img,
+img.photo-left,
+.photo-right img,
+img.photo-right {
 	background: #ffffff;
 	border: 1px solid #eeeeee;
 	-moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
@@ -43,15 +79,47 @@ img.photo_right
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
 }
 
-.photo_left {
+.photo-left {
 	float: left;
-	margin: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
 }
 
-.photo_right {
+.photo-right {
 	float: right;
-	margin: 5px;
+	margin-left: 5px;
+	margin-bottom: 5px;
 }
+
+div.ads {
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	text-align: center;
+}
+
+
+/* Nomad Dictionary */
+
+dl {
+	border: none;
+	padding: 0.5em;
+}
+dt {
+	float: left;
+	clear: left;
+	width: 150px;
+	text-align: right;
+	font-weight: bold;
+	color: #000000;
+}
+dt:after {
+content: ":";
+}
+dd {
+margin: 0 0 0 155px;
+padding: 0 0 0.5em 0;
+}
+
 
 
 /*

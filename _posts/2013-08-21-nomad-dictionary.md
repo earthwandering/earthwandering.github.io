@@ -4,14 +4,14 @@ title:  "Nomad Dictionary"
 date:   2013-08-21 11:00:00
 categories: dictionary
 author: Steph
-excerpt: All the words you need to know to travel
+synopsis: All the words you need to know to travel
 mainpic: http://farm6.staticflickr.com/5517/9570584857_26c26698aa_q.jpg
 ---
 
 In no particular order :)
 
 <dl>
-	<dt>Ground score</dt>
+	<dt><a name="groundscore"></a>Ground score</dt>
 		<dd>Something found on the ground</dd>
 	<dt>Hippie mace</dt>
 		<dd>Flash light</dd>
@@ -35,7 +35,7 @@ In no particular order :)
 		<dd>Person that chooses to live homeless</dd>	
 	<dt>Kick down</dt>
 		<dd>Anything given</dd>
-	<dt>Poop Bags</dt>
+	<dt><a name="poopbag"></a>Poop Bags</dt>
 		<dd>Free bags normally provided for picking up dog poop, but actually much more useful for everything else.</dd>
 </dl>
 
