@@ -8,6 +8,15 @@
 	margin-bottom: 10px !important;
 }
 
+span.awesome {
+	display: inline-block;
+	background:transparent url("/assets/fff/icons/medal_gold_3.png") no-repeat 0 center
+	width: 16px;
+	height: 16px;
+	margin: 0px;
+	padding: 10px;
+}
+
 .post-detail {
 	font-size: .8em;
 	font-weight: bold;
@@ -120,8 +129,6 @@ dd {
 margin: 0 0 0 155px;
 padding: 0 0 0.5em 0;
 }
-
-
 
 /*
 div.jumbotron {

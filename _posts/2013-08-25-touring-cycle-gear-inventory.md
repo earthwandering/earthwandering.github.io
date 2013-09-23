@@ -16,14 +16,14 @@ Before leaving on my long bike trip, I looked all over for a good complete touri
 
 The process of capturing all these pictures turned into an adventure in itself.  You'll notice that down around the clothing bag that the background scenery changes.  While Steph took a picture to prove that ALL of my clothing was captured in the pic, she walked up the hill behind me and stepped in a yellow jacket nest.  This ended the project for about two hours and started a separate project covered in this blog post <a href="">Yellow Jacket Disaster Gear Salvage</a>.  The bottle of port was especially important during this phase of the trip.
 
-I'll start with pictures of the bike loaded up and ready to ride and then go into each bag and some of the sub-bags separately.  Items with &diams; are very liked.
+I'll start with pictures of the bike loaded up and ready to ride and then go into each bag and some of the sub-bags separately.  Items with &diams; <span class="awesome"></span> are very liked.
 
 **Fully Loaded Bike**
 
 <a class="photo" href="http://www.flickr.com/photos/100330886@N04/9594249168/in/set-72157635232920260"><img title="Loaded Touring Bike Side View" src="http://farm3.staticflickr.com/2812/9594249168_61b96b3ec3.jpg" /></a>
 <a class="photo" href="http://www.flickr.com/photos/100330886@N04/9591463703/in/set-72157635232920260"><img title="Loaded Touring Bike Top View" src="http://farm6.staticflickr.com/5511/9591463703_1112a450d6.jpg" /></a>
 
-- &diams; <a href="http://www.bikepedia.com/quickbike/BikeSpecs.aspx?year=2006&brand=Raleigh&model=Route+1#.UjQbJGQ6VU4">Raleigh Route 1</a> - A cheap, but sturdy bike that has been getting me around since 2006 or so
+- <span class="awesome">&nbsp;</span> &diams; <a href="http://www.bikepedia.com/quickbike/BikeSpecs.aspx?year=2006&brand=Raleigh&model=Route+1#.UjQbJGQ6VU4">Raleigh Route 1</a> - A cheap, but sturdy bike that has been getting me around since 2006 or so
 - &diams; <a href="http://www.amazon.com/gp/product/B0028FRZ08/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B0028FRZ08&linkCode=as2&tag=alofcr-20">Ortlieb Back Roller Classic Pannier</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=alofcr-20&l=as2&o=1&a=B0028FRZ08" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 - &diams; <a href="http://www.amazon.com/gp/product/B002A8E6TG/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B002A8E6TG&linkCode=as2&tag=alofcr-20">Ortlieb Frontroller Classic Pannier</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=alofcr-20&l=as2&o=1&a=B002A8E6TG" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 - &diams; <a href="http://www.amazon.com/gp/product/B000HZA918/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000HZA918&linkCode=as2&tag=alofcr-20">Brooks Saddles B17 Standard Bicycle Saddle (Black Rails, Black)</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=alofcr-20&l=as2&o=1&a=B000HZA918" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
