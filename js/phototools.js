@@ -30,10 +30,6 @@ function loadPhotosets(flickrKey, flickrUserId, outputArea) {
 function loadPhotosetPhotos(photosetId, userId, flickrKey) {
 	var flickrargs = {format:'json', api_key: flickrKey, user_id: userId, photoset_id: photosetId, method: 'flickr.photosets.getPhotos'};	
 	console.log("Loading photos with args: " + JSON.stringify(flickrargs) + "\n");
-
-	var imgsize = $("#input_imgsize").val();
-
-	console.log("photos (set:" + photosetId + ")\n");
 	
 	var optiondata = getOptionData();
 	var previewoptiondata = getPreviewOptionData();
@@ -76,7 +72,6 @@ function getImagePreviewHtml(optiondata, photodata, photosetId) {
 }
 
 function getImageHtml(optiondata, photodata, photosetId) {
-	//photodata.id, photodata.farm, photodata.server, photodata.secret, imgsize
 	var html="";
 	
 	if (optiondata.includelink) {
