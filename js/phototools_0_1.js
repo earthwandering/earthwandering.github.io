@@ -53,7 +53,7 @@ function displayImgs() {
 			//this image goes in the next row, but we display the existing row now
 			displayRow(rowaccumulator);
 			rowaccumulator = new Array(img);
-			accumulatedwidth = imgnaturalwidth;				
+			accumulatedwidth = parseFloat(img.attr('naturalwidth'));				
 		} else if (accumulatedwidth > minprotorowwidth) {
 			//add the img and display the row now
 			rowaccumulator.push(img);
