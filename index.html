@@ -5,7 +5,7 @@ title: Earth Wandering
 
 <div class="featured-row row">
 	{% for post in site.posts %}
-	{% if post.featured == true %}
+	{% if post.featured == true && post.published != false %}
 	<div class="span12 col-md-12 featured-post-box">
 
 		<p>
@@ -38,7 +38,7 @@ title: Earth Wandering
 
 <div class="regular-row row">
 	{% for post in site.posts %}
-	{% if post.featured != true %}
+	{% if post.featured != true && post.published != false %}
 	<div class="col-md-3 post-box">
 		{% if post.mainpic != "" %}
 			<a href="{{ post.url }}">

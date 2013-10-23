@@ -12,18 +12,31 @@ samplephotoset: 72157635232920260
 var flickrbase = 'http://api.flickr.com/services/rest/?jsoncallback=?';
 
 $(document).ready(function() {
-   getImgsForPhotoset('72157635232920260','100330886@N04','2105c3f58a7d85488a10f2db6c151be1');
-});
 
-function getUserId() {
-	return '{{page.flickruserid}}';
-}
+	var userid = $.QueryString["userid"];
+	var flickrkey = $.QueryString["flickrkey"];
+	var setid = $.QueryString["setid"];
+
+	if (userid != undefined && flickrkey != undefined && setid != undefined) {
+		loadImgsForPhotoset(setid, userid, flickrkey);
+	} else if (userid != undefined && flickrkey != undefined) {
+		loadPhotosets(flickrkey, userid, $('#photosets'));   
+	} else {
+		userid = "{{ page.flickruserid }}";
+		flickrkey = "{{ page.flickrkey }}";
+		loadPhotosets(flickrkey, userid, $('#photosets'));   
+	}
+
+	
+});
 
 
 </script>
 
-<div id="setdiv72157635232920260">
-	<strong><a href="http://www.flickr.com/photos/100330886@N04/sets/72157635232920260">Touring Bike Inventory</a></strong>
-	<span id="setspan72157635232920260"></span>
+<div id="photosets">
+
 </div>
 
+<div id="photostream">
+
+</div>
