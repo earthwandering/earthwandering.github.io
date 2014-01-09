@@ -5,17 +5,173 @@ googkey: AIzaSyAbPI7QmnMEU5C_Go_BcATMX2a60A4HAOw
 
 ---
 
+<script src="/js/jquery.cookie.js"></script>
+
 <script type="text/javascript">
+var devmode = true;
+var lastresponse = null;
+var leftLanguage = "en";
+var leftTitle = "English";
 
-var response = null;
+var rightLanguage = "fr";
+var rightTitle = "Français";
 
-$.getJSON("https://www.googleapis.com/language/translate/v2?key={{ page.googkey }}&q=hello%20world&source=en&target=fr",
-         function(data) {
-         	response = data;
-            alert(data.data.translations[0].translatedText);
-});   
+$(document).ready(function() {
+	$("#leftInputTextArea").keyup(function(event){
+		if(event.keyCode == 13){
+			$("#leftSubmit").click();
+		}
+	});
+	
+	$("#rightInputTextArea").keyup(function(event){
+		if(event.keyCode == 13){
+			$("#rightSubmit").click();
+		}
+	});
+
+	$("#leftTitle").text(leftTitle);
+	$("#rightTitle").text(rightTitle);
+
+	var lastTranslatedLeft = $.cookie("lastTranslatedLeft");
+	if (lastTranslatedLeft) {	
+		$("#leftInputTextArea")[0].value = lastTranslatedLeft;
+	}
+	var lastTranslatedRight = $.cookie("lastTranslatedRight");
+	if (lastTranslatedRight) {	
+		$("#rightInputTextArea")[0].value = lastTranslatedRight;
+	}	
+});
+
+/**
+User initiated translate function
+*/
+function translateUserTextLeft() {	
+	var userinput = $("#leftInputTextArea")[0].value;
+	requestTranslation(
+		userinput,
+		leftLanguage,
+		rightLanguage,
+		function(text) {
+			recordTranslation(userinput, text);
+		}
+	);
+}
+
+function translateUserTextRight() {	
+	var userinput = $("#rightInputTextArea")[0].value;
+	requestTranslation(
+		userinput, 
+		rightLanguage,
+		leftLanguage, 
+		function(text) {
+			recordTranslation(text, userinput);
+		}
+	);
+}
 
 
+var historyCount = 1;
+
+function recordTranslation(left, right) {
+	console.log("left: " + left + " right: " + right);
+
+	$.cookie("lastTranslatedLeft", left);
+	$.cookie("lastTranslatedRight", right);
+	
+	var leftAction = turnEachWordIntoActionHtml(left, "left");
+	var rightAction = turnEachWordIntoActionHtml(right, "right");
+	
+	var resultsArea = $("#userhistory");	
+	var resultsRow = $('<div />');
+	resultsRow.attr("id", "resultsRow_" + historyCount);
+	resultsRow.attr("style", "border: 1px solid black; padding: 2px; margin: 2px;");
+	resultsArea.prepend(resultsRow);
+
+	var resultsLeft = $("<div />");
+	resultsLeft.attr("id", "resultsLeft_" + historyCount);
+	resultsLeft.attr("style", "display: inline-block; width: 49%;");
+	resultsLeft.html(leftAction);
+	resultsRow.append(resultsLeft);
+	
+	var resultsRight = $("<div />");
+	resultsRight.attr("id", "resultsRight_" + historyCount);
+	resultsRight.attr("style", "display: inline-block; width: 49%;");
+	resultsRight.html(rightAction);	
+	resultsRow.append(resultsRight);
+		
+	historyCount++;
+}
+
+function urlEncode(unencodedText) {
+	var result = encodeURIComponent(text);
+	return result;
+}
+
+function turnEachWordIntoActionHtml(plainText, langId) {
+	var words = plainText.split(" ");
+	var result = $("<span />");
+	for(var index in words) {
+		var wordup = $("<span />");
+		wordup.attr("onclick","segmentTranslate(this)");
+		wordup.attr("language", langId);
+		wordup.html(words[index]);
+		result.append(wordup).append(" ");
+	}
+	
+	return result;
+}
+
+function segmentTranslate(node) {
+	var wordNode = $(node);
+		
+	alert($(wordNode).text());
+}
+
+function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) {
+	lastresponse = null;
+	if (devmode) {
+		console.log("Making fake translation because in devmode of: " + unencodedText); 
+		resultHandler("fako translato: " + unencodedText);
+	} else {
+		console.log("Making actual api call for translation of: " + unencodedText);
+		
+		var url = "https://www.googleapis.com/language/translate/v2?key={{ page.googkey }}source=" + fromLangId + "&target=" + toLangId + "&q=" + text;
+		
+		$.getJSON(
+			url,
+			function(response) {
+				lastresponse = response;
+				resultHandler(response.data.translations[0].translatedText);
+			},
+			function(error) {
+				alert("Error translating: " + error);
+				console.log(error);
+			}
+		
+		); 
+	}
+}
 
 </script>
+
+<div id="userinputrow">
+	<div id="leftInputDiv" style="display: inline-block; width: 49%;">
+		<h1 id="leftTitle"></h1>
+		<textarea id="leftInputTextArea" rows="2" cols="40"></textarea>
+		<input id="leftSubmit" onclick="translateUserTextLeft()" type="submit" value="Translate" />
+	</div>
+	<div id="rightInputDiv" style="display: inline-block; width: 49%;">
+		<h1 id="rightTitle"></h1>
+		<textarea id="rightInputTextArea" rows="2" cols="40"></textarea>
+		<input id="rightSubmit" onclick="translateUserTextRight()" type="submit" value="Translate" />
+	</div>
+	
+</div>
+
+<div id="userhistory">
+
+</div>
+
+
+
 
