@@ -20,11 +20,11 @@ $(document).ready(function() {
 	if (userid != undefined && flickrkey != undefined && setid != undefined) {
 		loadImgsForPhotoset(setid, userid, flickrkey);
 	} else if (userid != undefined && flickrkey != undefined) {
-		loadPhotosets(flickrkey, userid, $('#photosets'));   
+		loadPhotosetList(flickrkey, userid, $('#photosets'));   
 	} else {
 		userid = "{{ page.flickruserid }}";
 		flickrkey = "{{ page.flickrkey }}";
-		loadPhotosets(flickrkey, userid, $('#photosets'));   
+		loadPhotosetList(flickrkey, userid, $('#photosets'));   
 	}
 
 	

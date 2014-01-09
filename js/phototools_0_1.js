@@ -82,7 +82,10 @@ function displayRow(rowaccumulator) {
 	//pass to find the shortest one
 	var shortestimg = null;
 	$.each(rowaccumulator, function(index, img) {
-		if (shortestimg == null || parseFloat(shortestimg.naturalheight) > parseFloat(img.naturalheight)){
+		if (
+				shortestimg == null 
+				|| parseInt(shortestimg.attr("naturalheight")) > parseInt(img.attr("naturalheight"))
+			) {
 			shortestimg = img;
 		}
 	});
@@ -90,10 +93,10 @@ function displayRow(rowaccumulator) {
 	//pass to normalize the heights (virtually)
 	var newrowwidth = 0;
 	$.each(rowaccumulator, function(index, img) {
-		if (parseFloat(shortestimg.naturalheight) != parseFloat(img.attr('naturalheight'))) {
+		if (parseInt(shortestimg.attr("naturalheight")) != parseInt(img.attr('naturalheight'))) {
 			var scalingfactor = (parseFloat(shortestimg.attr('naturalheight')) / parseFloat(img.attr('naturalheight')));
 			img.attr("heightscaling", scalingfactor);
-			newrowwidth += parseFloat(img.attr('naturalwidth')) * scalingfactor;
+			newrowwidth += parseInt(img.attr('naturalwidth')) * scalingfactor;
 		} else {
 			img.attr("heightscaling", "1");
 			newrowwidth += img.width;
@@ -201,7 +204,7 @@ $.QueryString["param"]
     })(window.location.search.substr(1).split('&'))
 })(jQuery);
 
-function loadPhotosets(flickrKey, flickrUserId, outputArea) {
+function loadPhotosetList(flickrKey, flickrUserId, outputArea) {
 	var flickrargs = {format:'json', api_key: flickrKey, user_id: flickrUserId, method: 'flickr.photosets.getList'};	
 	console.log("Loading photoset with args: " + JSON.stringify(flickrargs) + "\n");
 

@@ -1,9 +1,10 @@
 
 .jumbotron {
-	background-image: url('http://farm8.staticflickr.com/7392/9778101904_01686ebe4c_b.jpg');
+	//background-image: url('http://farm8.staticflickr.com/7392/9778101904_01686ebe4c_b.jpg');
+	background-image: url('http://farm8.staticflickr.com/7337/9566185766_66834d821f_b.jpg');
 	background-repeat: no-repeat;
 	background-color: #CCCCCC;
-	background-size: 2000px 200px;
+	background-size: 100% 100%;
 	
 	margin-bottom: 10px !important;
 }
