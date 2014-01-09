@@ -1,0 +1,21 @@
+---
+layout: basic_bs
+title:  Earth Wandering Translatortron 2000
+googkey: AIzaSyAbPI7QmnMEU5C_Go_BcATMX2a60A4HAOw
+
+---
+
+<script type="text/javascript">
+
+var response = null;
+
+$.getJSON("https://www.googleapis.com/language/translate/v2?key={{ page.googkey }}&q=hello%20world&source=en&target=fr",
+         function(data) {
+         	response = data;
+            alert(data.data.translations[0].translatedText);
+});   
+
+
+
+</script>
+
