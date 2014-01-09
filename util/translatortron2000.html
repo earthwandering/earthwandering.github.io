@@ -8,23 +8,37 @@ googkey: AIzaSyAbPI7QmnMEU5C_Go_BcATMX2a60A4HAOw
 <script src="/js/jquery.cookie.js"></script>
 
 <script type="text/javascript">
-var devmode = true;
-var lastresponse = null;
+/**
+TODO:
+
+* Prevent enters from making it into the text area.
+
+
+*/
+
+
+var devmode = false;
+
 var leftLanguage = "en";
 var leftTitle = "English";
 
 var rightLanguage = "fr";
 var rightTitle = "Français";
 
+var lastresponse = null;
+var lastkeyup = null;
+
 $(document).ready(function() {
 	$("#leftInputTextArea").keyup(function(event){
 		if(event.keyCode == 13){
+			lastkeyup = event;
 			$("#leftSubmit").click();
 		}
 	});
 	
 	$("#rightInputTextArea").keyup(function(event){
 		if(event.keyCode == 13){
+			lastkeyup = event;
 			$("#rightSubmit").click();
 		}
 	});
@@ -32,14 +46,26 @@ $(document).ready(function() {
 	$("#leftTitle").text(leftTitle);
 	$("#rightTitle").text(rightTitle);
 
-	var lastTranslatedLeft = $.cookie("lastTranslatedLeft");
-	if (lastTranslatedLeft) {	
-		$("#leftInputTextArea")[0].value = lastTranslatedLeft;
+	var queryEn = $.QueryString["en"];
+	var queryFr = $.QueryString["fr"];
+	
+	if(queryEn) {
+		$("#leftInputTextArea")[0].value = queryEn;
+		$("#leftSubmit").click();
+	} else if (queryFr) {
+		$("#rightInputTextArea")[0].value = queryFr;
+		$("#rightSubmit").click();
+	} else {
+		//show the old translation values for convenience
+		var lastTranslatedLeft = $.cookie("lastTranslatedLeft");
+		if (lastTranslatedLeft) {	
+			$("#leftInputTextArea")[0].value = lastTranslatedLeft;
+		}
+		var lastTranslatedRight = $.cookie("lastTranslatedRight");
+		if (lastTranslatedRight) {	
+			$("#rightInputTextArea")[0].value = lastTranslatedRight;
+		}
 	}
-	var lastTranslatedRight = $.cookie("lastTranslatedRight");
-	if (lastTranslatedRight) {	
-		$("#rightInputTextArea")[0].value = lastTranslatedRight;
-	}	
 });
 
 /**
@@ -53,6 +79,7 @@ function translateUserTextLeft() {
 		rightLanguage,
 		function(text) {
 			recordTranslation(userinput, text);
+			$("#rightInputTextArea")[0].value = text;
 		}
 	);
 }
@@ -65,6 +92,7 @@ function translateUserTextRight() {
 		leftLanguage, 
 		function(text) {
 			recordTranslation(text, userinput);
+			$("#leftInputTextArea")[0].value = text;
 		}
 	);
 }
@@ -84,7 +112,7 @@ function recordTranslation(left, right) {
 	var resultsArea = $("#userhistory");	
 	var resultsRow = $('<div />');
 	resultsRow.attr("id", "resultsRow_" + historyCount);
-	resultsRow.attr("style", "border: 1px solid black; padding: 2px; margin: 2px;");
+	resultsRow.attr("style", "border: 1px solid gray; padding: 5px; margin: 5px;");
 	resultsArea.prepend(resultsRow);
 
 	var resultsLeft = $("<div />");
@@ -103,7 +131,8 @@ function recordTranslation(left, right) {
 }
 
 function urlEncode(unencodedText) {
-	var result = encodeURIComponent(text);
+	var result = encodeURIComponent(unencodedText);
+	console.log("url encoded text: " + result);
 	return result;
 }
 
@@ -123,9 +152,29 @@ function turnEachWordIntoActionHtml(plainText, langId) {
 
 function segmentTranslate(node) {
 	var wordNode = $(node);
-		
-	alert($(wordNode).text());
+	var language = wordNode.attr("language");
+	var text = wordNode.text();
+
+	var from = null;
+	var to = null;	
+	if (language == "left") {
+		console.log("translating left word: " + text);
+		from = leftLanguage;
+		to = rightLanguage;
+	} else if (language == "right") {
+		console.log("translating right word: " + text);
+		from = rightLanguage;
+		to = leftLanguage;
+	}
+	requestTranslation(text, from, to, function(resultText) {
+		wordNode.attr("title", resultText);
+		wordNode.html(text + " (" + resultText + ")");
+		console.log("single word translation: " + text + " --- to: --- " + resultText);
+	});
+
+	
 }
+
 
 function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) {
 	lastresponse = null;
@@ -133,9 +182,12 @@ function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) 
 		console.log("Making fake translation because in devmode of: " + unencodedText); 
 		resultHandler("fako translato: " + unencodedText);
 	} else {
-		console.log("Making actual api call for translation of: " + unencodedText);
 		
-		var url = "https://www.googleapis.com/language/translate/v2?key={{ page.googkey }}source=" + fromLangId + "&target=" + toLangId + "&q=" + text;
+		var encodedText = urlEncode(unencodedText);
+		
+		console.log("Making actual api call for translation of: " + unencodedText);
+				
+		var url = "https://www.googleapis.com/language/translate/v2?key={{ page.googkey }}&source=" + fromLangId + "&target=" + toLangId + "&q=" + encodedText;
 		
 		$.getJSON(
 			url,
@@ -152,17 +204,54 @@ function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) 
 	}
 }
 
+/**
+Approach for QueryString access from: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values
+Usage:
+$.QueryString["param"]
+**/
+(function($) {
+    $.QueryString = (function(a) {
+        if (a == "") return {};
+        var b = {};
+        for (var i = 0; i < a.length; ++i)
+        {
+            var p=a[i].split('=');
+            if (p.length != 2) continue;
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+    })(window.location.search.substr(1).split('&'))
+})(jQuery);
 </script>
 
-<div id="userinputrow">
+<div>
+<p>
+	Hey Steph, There are two things here that are cool:
+	<ol>
+		<li>A history of the phrase translations is shown, which can be helpful</li>
+		<li>You can click on the individual words in the results (English or French) and get a single word translation</li>	
+	</ol>
+</p>
+<p>
+	Also you can have it automatically do a translation when you load the page by using an address like:<br />
+	http://earthwandering.com/util/translatortron2000.html?en=Hello <br />
+	http://earthwandering.com/util/translatortron2000.html?fr=Bonjour <br />
+</p>
+<p>
+	The cost is $.01 per 500 characters.  Not very much.
+</p>
+
+</div>
+
+<div id="userinputrow" style="padding: 5px;">
 	<div id="leftInputDiv" style="display: inline-block; width: 49%;">
 		<h1 id="leftTitle"></h1>
-		<textarea id="leftInputTextArea" rows="2" cols="40"></textarea>
+		<textarea id="leftInputTextArea" rows="2" cols="60"></textarea>
 		<input id="leftSubmit" onclick="translateUserTextLeft()" type="submit" value="Translate" />
 	</div>
 	<div id="rightInputDiv" style="display: inline-block; width: 49%;">
 		<h1 id="rightTitle"></h1>
-		<textarea id="rightInputTextArea" rows="2" cols="40"></textarea>
+		<textarea id="rightInputTextArea" rows="2" cols="60"></textarea>
 		<input id="rightSubmit" onclick="translateUserTextRight()" type="submit" value="Translate" />
 	</div>
 	
