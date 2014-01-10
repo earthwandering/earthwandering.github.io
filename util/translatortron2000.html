@@ -189,11 +189,12 @@ function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) 
 	var mykey = '{{ page.googkey }}';
 	var theirkey = $('#googleapikey')[0].value;
 	var usekey = mykey;
-	if (theirkey.indexOf("Please") == -1) {
+	if (theirkey.indexOf("Please") == -1 && theirkey != "") {
 		console.log("Using user entered key: " + theirkey);
 		$.cookie("usergoogletranslateapikey", theirkey);
 		usekey = theirkey;
 	} else {
+		$("#googleapikey")[0].value = $("#googleapikey")[0].title;
 		console.log("Using earthwandering key: " + mykey);
 	}	
 	
@@ -206,20 +207,21 @@ function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) 
 		
 		console.log("Making actual api call for translation of: " + unencodedText);
 
-		var url = "https://www.googleapis.com/language/translate/v2?key=" + usekey + "&source=" + fromLangId + "&target=" + toLangId + "&q=" + encodedText;
-		
-		$.getJSON(
-			url,
-			function(response) {
+		var translateurl = "https://www.googleapis.com/language/translate/v2?key=" + usekey + "&source=" + fromLangId + "&target=" + toLangId + "&q=" + encodedText;
+
+		jQuery.ajax({
+			type: "GET",
+			url: translateurl,
+			dataType: "json",
+			success: function(response){
 				lastresponse = response;
 				resultHandler(response.data.translations[0].translatedText);
 			},
-			function(error) {
+			error: function(error){
 				alert("Google Translate API Key May Not Be Working\nError translating: " + error);
 				console.log(error);
 			}
-		
-		); 
+		});		
 	}
 }
 
