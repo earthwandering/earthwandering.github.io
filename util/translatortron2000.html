@@ -196,6 +196,7 @@ function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) 
 	} else {
 		$("#googleapikey")[0].value = $("#googleapikey")[0].title;
 		console.log("Using earthwandering key: " + mykey);
+		$.cookie("usergoogletranslateapikey", "");
 	}	
 	
 	if (devmode) {
