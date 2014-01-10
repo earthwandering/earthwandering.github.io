@@ -183,7 +183,7 @@ function segmentTranslate(node) {
 function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) {
 	lastresponse = null;
 	
-	var mykey = '{{ googkey }}';
+	var mykey = '{{ page.googkey }}';
 	var theirkey = $('#googleapikey')[0].value;
 	var usekey = mykey;
 	if (theirkey.indexOf("Please") == -1) {
@@ -191,7 +191,7 @@ function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) 
 		$.cookie("usergoogletranslateapikey", theirkey);
 		usekey = theirkey;
 	} else {
-		console.log("Using earthwandering key");
+		console.log("Using earthwandering key: " + mykey);
 	}	
 	
 	if (devmode) {
