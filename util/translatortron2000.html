@@ -26,35 +26,46 @@ var rightLanguage = "fr";
 var rightTitle = "Français";
 
 var lastresponse = null;
-var lastkeyup = null;
 
 $(document).ready(function() {
-	$("#leftInputTextArea").keyup(function(event){
+	$("#leftInputTextArea").keypress(function(event){
 		if(event.keyCode == 13){
-			lastkeyup = event;
-			$("#leftSubmit").click();
+			translateUserTextLeft();
+			event.preventDefault();
+			return false;
 		}
 	});
 	
-	$("#rightInputTextArea").keyup(function(event){
+	$("#rightInputTextArea").keypress(function(event){
 		if(event.keyCode == 13){
-			lastkeyup = event;
-			$("#rightSubmit").click();
+			translateUserTextRight();
+			event.preventDefault();
+			return false;
 		}
 	});
 
 	$("#leftTitle").text(leftTitle);
 	$("#rightTitle").text(rightTitle);
-
+	
 	var queryEn = $.QueryString["en"];
 	var queryFr = $.QueryString["fr"];
+
+	var userapikey = $.cookie("usergoogletranslateapikey");
+	if (userapikey) {
+		console.log("Found previously entered user api key.");
+		$("#googleapikey")[0].value = userapikey;
+	} else {
+		console.log("Did NOT find previously entered user api key.");
+		$("#googleapikey")[0].value = $("#googleapikey")[0].title;
+	}
 	
 	if(queryEn) {
 		$("#leftInputTextArea")[0].value = queryEn;
 		$("#leftSubmit").click();
+		translateUserTextLeft();
 	} else if (queryFr) {
 		$("#rightInputTextArea")[0].value = queryFr;
-		$("#rightSubmit").click();
+		translateUserTextRight();
 	} else {
 		//show the old translation values for convenience
 		var lastTranslatedLeft = $.cookie("lastTranslatedLeft");
@@ -101,7 +112,7 @@ function translateUserTextRight() {
 var historyCount = 1;
 
 function recordTranslation(left, right) {
-	console.log("left: " + left + " right: " + right);
+	//console.log("left: " + left + " right: " + right);
 
 	$.cookie("lastTranslatedLeft", left);
 	$.cookie("lastTranslatedRight", right);
@@ -117,13 +128,13 @@ function recordTranslation(left, right) {
 
 	var resultsLeft = $("<div />");
 	resultsLeft.attr("id", "resultsLeft_" + historyCount);
-	resultsLeft.attr("style", "display: inline-block; width: 49%;");
+	resultsLeft.attr("style", "display: inline-block; width: 40%;");
 	resultsLeft.html(leftAction);
 	resultsRow.append(resultsLeft);
 	
 	var resultsRight = $("<div />");
 	resultsRight.attr("id", "resultsRight_" + historyCount);
-	resultsRight.attr("style", "display: inline-block; width: 49%;");
+	resultsRight.attr("style", "display: inline-block; width: 40%;");
 	resultsRight.html(rightAction);	
 	resultsRow.append(resultsRight);
 		
@@ -132,7 +143,7 @@ function recordTranslation(left, right) {
 
 function urlEncode(unencodedText) {
 	var result = encodeURIComponent(unencodedText);
-	console.log("url encoded text: " + result);
+	//console.log("url encoded text: " + result);
 	return result;
 }
 
@@ -158,11 +169,11 @@ function segmentTranslate(node) {
 	var from = null;
 	var to = null;	
 	if (language == "left") {
-		console.log("translating left word: " + text);
+		//console.log("translating left word: " + text);
 		from = leftLanguage;
 		to = rightLanguage;
 	} else if (language == "right") {
-		console.log("translating right word: " + text);
+		//console.log("translating right word: " + text);
 		from = rightLanguage;
 		to = leftLanguage;
 	}
@@ -170,14 +181,23 @@ function segmentTranslate(node) {
 		wordNode.attr("title", resultText);
 		wordNode.html(text + " (" + resultText + ")");
 		console.log("single word translation: " + text + " --- to: --- " + resultText);
-	});
-
-	
+	});	
 }
-
 
 function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) {
 	lastresponse = null;
+	
+	var mykey = '{{ googkey }}';
+	var theirkey = $('#googleapikey')[0].value;
+	var usekey = mykey;
+	if (theirkey.indexOf("Please") == -1) {
+		console.log("Using user entered key: " + theirkey);
+		$.cookie("usergoogletranslateapikey", theirkey);
+		usekey = theirkey;
+	} else {
+		console.log("Using earthwandering key");
+	}	
+	
 	if (devmode) {
 		console.log("Making fake translation because in devmode of: " + unencodedText); 
 		resultHandler("fako translato: " + unencodedText);
@@ -186,8 +206,8 @@ function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) 
 		var encodedText = urlEncode(unencodedText);
 		
 		console.log("Making actual api call for translation of: " + unencodedText);
-				
-		var url = "https://www.googleapis.com/language/translate/v2?key={{ page.googkey }}&source=" + fromLangId + "&target=" + toLangId + "&q=" + encodedText;
+
+		var url = "https://www.googleapis.com/language/translate/v2?key=" + usekey + "&source=" + fromLangId + "&target=" + toLangId + "&q=" + encodedText;
 		
 		$.getJSON(
 			url,
@@ -196,7 +216,7 @@ function requestTranslation(unencodedText, fromLangId, toLangId, resultHandler) 
 				resultHandler(response.data.translations[0].translatedText);
 			},
 			function(error) {
-				alert("Error translating: " + error);
+				alert("Google Translate API Key May Not Be Working\nError translating: " + error);
 				console.log(error);
 			}
 		
@@ -224,35 +244,41 @@ $.QueryString["param"]
 })(jQuery);
 </script>
 
-<div>
-<p>
-	Hey Steph, There are two things here that are cool:
-	<ol>
-		<li>A history of the phrase translations is shown, which can be helpful</li>
-		<li>You can click on the individual words in the results (English or French) and get a single word translation</li>	
-	</ol>
-</p>
-<p>
-	Also you can have it automatically do a translation when you load the page by using an address like:<br />
-	http://earthwandering.com/util/translatortron2000.html?en=Hello <br />
-	http://earthwandering.com/util/translatortron2000.html?fr=Bonjour <br />
-</p>
-<p>
-	The cost is $.01 per 500 characters, and I have it limited to $1.00/day.  Annoying, but not very much money.
-</p>
+<div id="shownotes">
+	<a style="font-size: .8em;" onclick="$('#notes').show(); $('#shownotes').hide()">Show Notes</a>
+</div>
 
+<div style="display:none;" id="notes">
+	<p>
+		There are 3 things here that are cool over the normal Google Translate API:
+		<ol>
+			<li>A history of the phrase translations is shown, which can be helpful</li>
+			<li>You can click on the individual words in the results (English or French) and get a single word translation</li>	
+			<li>
+				You can have it automatically do a translation when you load the page by using an address like:<br />
+				http://earthwandering.com/util/translatortron2000.html?en=Hello <br />
+				http://earthwandering.com/util/translatortron2000.html?fr=Bonjour <br />
+			</li>			
+		</ol>
+	</p>
+	<p>
+		The cost is $.01 per 500 characters, and I have it limited to $1.00/day.  If you'd like to use this page, please get your own Google Translate API key here: <a href="https://developers.google.com/translate/v2/pricing">https://developers.google.com/translate/v2/pricing</a>
+	</p>
+</div>
+
+<div id="googleapikeyarea">
+Your Google Translate API Key: 
+<input type="text" size="55" id="googleapikey" title="Please provide your own Google Translate API Key" value=""/>
 </div>
 
 <div id="userinputrow" style="padding: 5px;">
-	<div id="leftInputDiv" style="display: inline-block; width: 49%;">
+	<div id="leftInputDiv" style="display: inline-block; width: 40%;">
 		<h1 id="leftTitle"></h1>
-		<textarea id="leftInputTextArea" rows="2" cols="60"></textarea>
-		<input id="leftSubmit" onclick="translateUserTextLeft()" type="submit" value="Translate" />
+		<textarea id="leftInputTextArea" rows="3" cols="70"></textarea>
 	</div>
-	<div id="rightInputDiv" style="display: inline-block; width: 49%;">
+	<div id="rightInputDiv" style="display: inline-block; width: 40%;">
 		<h1 id="rightTitle"></h1>
-		<textarea id="rightInputTextArea" rows="2" cols="60"></textarea>
-		<input id="rightSubmit" onclick="translateUserTextRight()" type="submit" value="Translate" />
+		<textarea id="rightInputTextArea" rows="3" cols="70"></textarea>
 	</div>
 	
 </div>
