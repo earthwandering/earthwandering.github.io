@@ -86,7 +86,7 @@ function translateUserTextLeft() {
 		rightLanguage,
 		function(text) {
 			recordTranslation(userinput, text);
-			$("#rightInputTextArea")[0].value = text;
+			$("#rightInputTextArea")[0].value = urlDecode(text);
 		}
 	);
 }
@@ -99,11 +99,10 @@ function translateUserTextRight() {
 		leftLanguage, 
 		function(text) {
 			recordTranslation(text, userinput);
-			$("#leftInputTextArea")[0].value = text;
+			$("#leftInputTextArea")[0].value = urlDecode(text);
 		}
 	);
 }
-
 
 var historyCount = 1;
 
@@ -141,6 +140,10 @@ function urlEncode(unencodedText) {
 	var result = encodeURIComponent(unencodedText);
 	//console.log("url encoded text: " + result);
 	return result;
+}
+
+function urlDecode(encodedText) {
+	return $("<span>" + encodedText + "</span>").text();
 }
 
 function turnEachWordIntoActionHtml(plainText, langId) {
