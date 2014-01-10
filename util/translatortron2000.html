@@ -8,14 +8,6 @@ googkey: AIzaSyAbPI7QmnMEU5C_Go_BcATMX2a60A4HAOw
 <script src="/js/jquery.cookie.js"></script>
 
 <script type="text/javascript">
-/**
-TODO:
-
-* Prevent enters from making it into the text area.
-
-
-*/
-
 
 var devmode = false;
 
@@ -28,6 +20,10 @@ var rightTitle = "Français";
 var lastresponse = null;
 
 $(document).ready(function() {
+	if (devmode) {
+		$("body").prepend("<h1>DEVMODE ON</h1>");
+	}
+
 	$("#leftInputTextArea").keypress(function(event){
 		if(event.keyCode == 13){
 			translateUserTextLeft();
