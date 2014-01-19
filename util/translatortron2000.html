@@ -19,6 +19,8 @@ var rightTitle = "Français";
 
 var lastresponse = null;
 
+var wordRefId = 0;
+
 $(document).ready(function() {
 	if (devmode) {
 		$("body").prepend("<h1>DEVMODE ON</h1>");
@@ -146,15 +148,45 @@ function urlDecode(encodedText) {
 	return $("<span>" + encodedText + "</span>").text();
 }
 
-function turnEachWordIntoActionHtml(plainText, langId) {
+function turnEachWordIntoActionHtml(plainText, langPosition) {
 	var words = plainText.split(" ");
 	var result = $("<span />");
 	for(var index in words) {
+		var word = words[index];
+		
+		wordRefId++;
+		
 		var wordup = $("<span />");
-		wordup.attr("onclick","segmentTranslate(this)");
-		wordup.attr("language", langId);
-		wordup.html(words[index]);
 		result.append(wordup).append(" ");
+		wordup.attr("language", langPosition);
+		wordup.attr("id", "wordparent" + wordRefId);
+		wordup.hover(
+			function(wordelement) {
+				console.log("Entering: " + $(wordelement.delegateTarget).html());
+				$(wordelement.delegateTarget).find("a[name='wordref']").show();
+			}, 
+			function(wordelement) {
+				console.log("Leaving: " + $(wordelement.delegateTarget).html());
+				$(wordelement.delegateTarget).find("a[name='wordref']").hide();
+			}
+		);
+
+		var worddown = $("<span />");
+		wordup.append(worddown);
+		worddown.attr("onclick","segmentTranslate(this)");
+		worddown.attr("language", langPosition);
+		worddown.attr("id", "word" + wordRefId);
+		worddown.html(word);
+		
+		var wordref = $("<a />");
+		wordup.append(wordref);
+		wordref.attr("name","wordref");
+		wordref.attr("style", "display: none;");
+		wordref.html('<img title="see more" src="/assets/fff/icons/add.png" />');
+		wordref.attr("target", "_blank");
+		var wordreflang = ((langPosition == "left") ? leftLanguage + rightLanguage : rightLanguage + leftLanguage);		
+		//console.log("For word: " + word + " with langPosition: " + langPosition + " word ref langcode: " + wordreflang);
+		wordref.attr("href", "http://www.wordreference.com/" + wordreflang + "/" + word);		
 	}
 	
 	return result;
