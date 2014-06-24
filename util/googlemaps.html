@@ -2,9 +2,14 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 70% }
+	    html { height: 100% }
+	    body { height: 100%; margin: 0; padding: 0 }
+	    #map-canvas { height: 70% }
+	    .scrollFix {
+	    	line-height: 1.35;
+	    	overflow: hidden;
+	    	white-space: nowrap;
+	    }
     </style>
 
 
@@ -41,7 +46,7 @@
 
 		function showInfoWindow1() {
 			infowindow = new google.maps.InfoWindow({
-			    content: "<p>Howdy Chen</p>"
+			    content: "<div class='scrollFix'>Howdy Chen</div>"
 			});
 			infowindow.open(map,marker);
 
