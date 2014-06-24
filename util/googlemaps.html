@@ -1,0 +1,66 @@
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 70% }
+    </style>
+
+
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?"></script>
+	<script type="text/javascript">
+		//key=AIzaSyBaxFJL7oYa6TUodtu11Ul80uHy4iHW8tw
+
+		var map = null;
+		var marker = null;
+		var infoWindow = null;
+
+
+		function initialize() {
+			var mapOptions = {
+				center: new google.maps.LatLng(-34.397, 150.644),
+				zoom: 8
+			};
+			map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+
+		function showMarker1() {
+			var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+
+			// To add the marker to the map, use the 'map' property
+			marker = new google.maps.Marker({
+				position: myLatlng,
+				map: map,
+				title:"A Marker!"
+			});
+			marker.setMap(map);
+			map.setCenter(myLatlng);
+		}
+
+		function showInfoWindow1() {
+			infowindow = new google.maps.InfoWindow({
+			    content: "<p>Howdy Chen</p>"
+			});
+			infowindow.open(map,marker);
+
+		}
+
+	</script>
+
+</head>
+<body>
+
+	<div id="map-canvas"></div>
+
+	<div id="map-controls">
+
+		<input type="button" value="Show Marker" onclick="showMarker1()" />
+		<input type="button" value="Show Info window" onclick="showInfoWindow1()" />
+
+	</div>
+
+
+</body>
+</html>
