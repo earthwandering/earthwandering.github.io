@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+	<script src="/js/Snap.svg-0.3.0/dist/snap.svg.js"></script>
+	<script src="/js/jquery-1.10.2.min.js"></script>
+	<style type="text/css">
+		#svg {
+			width: 800px;
+			height: 400px;
+			border: 1px solid black;
+		}
+	</style>
+	<script type="text/javascript">
+		var wheel1;
+		var stop = false;
+		
+        $(document).ready(function () {
+			console.log("Howdy log");
+
+			var paper = Snap("#svg");
+
+			wheel1 = paper.group();
+			console.log("wheel1: " + wheel1);
+			wheel1.centerx = 100;
+			wheel1.centery = 100;
+			wheel1.radius = 50;
+			wheel1.angle = 0;
+			console.log("wheel parameters defined. while.radius=" + wheel1.radius);
+					
+			var spoke1 = paper.path("M" + wheel1.centerx + "," + wheel1.centery + "L" + (wheel1.centerx + wheel1.radius) + "," + wheel1.centery);
+			console.log("spoke 1 created");
+			
+			var rim1 = paper.circle(wheel1.centerx, wheel1.centery, wheel1.radius); 
+			console.log("rim1 created");
+			
+			wheel1.add(rim1);
+			wheel1.add(spoke1);
+			
+			console.log("wheel1 grouped");			
+
+			wheel1.attr({
+				fill: "#ffffff",
+			   	stroke: "#5555ff", 
+			   	strokeWidth: 2 
+			});
+			
+			rotateWheel1();
+		});
+		
+		function rotateWheel1() {
+			if (stop == true) return;
+			
+			wheel1.angle = wheel1.angle + 3;
+			
+			//console.log("Wheel angle: " + wheel1.angle);
+			
+			var r = new Snap.Matrix();
+			r.translate(0, 0);
+			r.rotate(wheel1.angle, wheel1.centerx, wheel1.centery);
+			
+			wheel1.transform(r);
+			
+			setTimeout("rotateWheel1()", 50);
+		}
+		
+	</script>
+  </head>
+  <body>
+  	<h3>
+  		Wheel 1
+  		
+  		<input type="button" value="Stop" onclick="stop = true;" />
+  	</h3>
+    <svg id="svg"></svg>
+  </body>
+</html>
