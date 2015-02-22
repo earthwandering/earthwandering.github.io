@@ -4,10 +4,63 @@ Requires snap.svg
 
 var bike = {
 
+    point: function(x, y) {
+        return {"x": x, "y": y};
+    },
+
     makeBike: function(svgSpace, Xo, Yo) {
         console.log("about to make bike.  Xo:" + Xo + ", Yo:" + Yo);
 
+        var frameColor = "#FF0000";
+
+        var axleY = Yo-50;
+        var backAxleC = this.point(Xo + 100, axleY);
+        var frontAxleC = this.point(Xo + 350, axleY);
+
+        var topTubeY = Yo - 180;
+        var seatJunctionC = this.point(Xo + 185, topTubeY);
+        var topTubeHeadJunctionC = this.point(Xo + 305, topTubeY);
+        var downTubeHeadJunctionC = this.point(Xo + 308, topTubeY + 25);
+
+        var bottomBracketC = this.point(Xo + 205, axleY);
+
+        var wheel1 = bike.makeWheel(svgSpace, backAxleC.x, backAxleC.y, 90, 32);
+        var wheel2 = bike.makeWheel(svgSpace, frontAxleC.x, frontAxleC.y, 90, 32);
+
+        var seatStay = svgSpace.path("M" + backAxleC.x + "," + backAxleC.y + "L" + seatJunctionC.x + "," + seatJunctionC.y);
+        seatStay.attr({stroke: frameColor, strokeWidth: 10});
+
+        var chainStay = svgSpace.path("M" + backAxleC.x + "," + backAxleC.y + "L" + bottomBracketC.x + "," + bottomBracketC.y);
+        chainStay.attr({stroke: frameColor, strokeWidth: 10});
+
+        var topTube = svgSpace.path("M" + seatJunctionC.x + "," + seatJunctionC.y + "L" + topTubeHeadJunctionC.x + "," + topTubeHeadJunctionC.y);
+        topTube.attr({stroke: frameColor, strokeWidth: 10});
+
+        var downTube = svgSpace.path("M" + bottomBracketC.x + "," + bottomBracketC.y + "L" + downTubeHeadJunctionC.x + "," + downTubeHeadJunctionC.y);
+        downTube.attr({stroke: frameColor, strokeWidth: 10});
+
+        var seatTube = svgSpace.path("M" + bottomBracketC.x + "," + bottomBracketC.y + "L" + seatJunctionC.x + "," + seatJunctionC.y);
+        seatTube.attr({stroke: frameColor, strokeWidth: 10});
+
+        var headTube = svgSpace.path("M" + topTubeHeadJunctionC.x + "," + topTubeHeadJunctionC.y + "L" + downTubeHeadJunctionC.x + "," + downTubeHeadJunctionC.y);
+        headTube.attr({stroke: frameColor, strokeWidth: 10});
+
+        var curveExaggeration = 10;
+        var forkCurveString =
+            "M" + downTubeHeadJunctionC.x + "," + downTubeHeadJunctionC.y +
+            "C" +
+            (downTubeHeadJunctionC.x - 2) + "," + (downTubeHeadJunctionC.y + curveExaggeration) + " " +
+            (frontAxleC.x - 2) + "," + (frontAxleC.y + curveExaggeration) + " " +
+            frontAxleC.x + "," + frontAxleC.y;
+
+        var fork = svgSpace.path(forkCurveString);
+        fork.attr({"fill-opacity": 0.0, stroke: frameColor, strokeWidth: 10});
+
+        bike.animateWheel(wheel1);
+        bike.animateWheel(wheel2);
     }, //makeBike
+
+
 
     /**
      * @param svgSpace as Snap
@@ -69,7 +122,6 @@ var bike = {
             //add spoke to wheel
             wheel.add(spoke);
         }
-
     },
 
     makeSpoke: function(wheel, angleInRad) {
@@ -93,7 +145,7 @@ var bike = {
         return spoke;
     },
 
-    animateWheel: function(wheel, animationDelay) {
+    animateWheel: function(wheel) {
         //console.log("Wheel angle: " + wheel1.angle);
 
         wheel.animate({ transform: 'r360,' + wheel.centerX + ',' + wheel.centerY}, 1000, mina.bounce );
