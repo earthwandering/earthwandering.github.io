@@ -1,59 +1,95 @@
 /**
 Requires snap.svg
-
-How many points do we care about?
-Back axle
-Front Axle
-Bottom Bracket
-Seat tube meets top tube
-
-
 */
 
+var bike = {
 
+    makeBike: function(svgSpace, Xo, Yo) {
+        console.log("about to make bike.  Xo:" + Xo + ", Yo:" + Yo);
 
-function makeBike1(svgSpace, Xo, Yo) {
+    }, //makeBike
 
+    /**
+     * @param svgSpace as Snap
+     * @param Xo as Number
+     * @param Yo as Number
+     * @param R as Number
+     * @param spokeCount as Number
+     */
+    makeWheel: function(svgSpace, Xo, Yo, R, spokeCount) {
+        console.log("Building wheel: Xo:" + Xo + ", Yo:" + Yo + ", R:" + R + ", spokeCount:" + spokeCount);
+        var wheel = svgSpace.group();
 
-}
+        wheel.svgSpace = svgSpace;
+        wheel.centerX = Xo;
+        wheel.centerY = Yo;
+        wheel.radius = R;
+        wheel.rimRadius = wheel.radius * .9;
+        wheel.tireWidth = wheel.radius * .08;
+        wheel.angle = 0;
+        wheel.metalColor = "#BBBBBB";
+        wheel.tireColor = "#000000";
+        wheel.spokeCount = spokeCount;
 
-function makeWheel(svgSpace, Xo, Yo, R, spokeCount) {
-	console.log("Building wheel: Xo:" + Xo + ", Yo:" + Yo + ", R:" + R + ", spokeCount:" + spokeCount);
-	var wheel = svgSpace.group();
-	
-	wheel.centerX = Xo;
-	wheel.centerY = Yo;
-	wheel.radius = R;
-	wheel.angle = 0;
+        var rim = svgSpace.circle(wheel.centerX, wheel.centerY, wheel.rimRadius);
+        rim.attr({
+            "fill-opacity": 0.0,
+            stroke: wheel.metalColor,
+            strokeWidth: 2
+        });
+        wheel.add(rim);
+        console.log("rim created");
 
-	var rim = svgSpace.circle(wheel.centerX, wheel.centerY, wheel.radius); 
-	var tire = svgSpace.circle(wheel.centerX, wheel.centerY, wheel.radius);
+        var tire = svgSpace.circle(wheel.centerX, wheel.centerY, wheel.radius);
+        tire.attr({
+            "fill-opacity": 0.0,
+            stroke: wheel.tireColor,
+            strokeWidth: wheel.tireWidth
+        });
+        wheel.add(tire);
+        console.log("tire created");
 
-	rim.attr({
-		fill-opacity: 0.0,
-		stroke: "#5555ff", 
-		strokeWidth: 2 
-	});
+        this.makeSpokes(wheel);
 
+        console.log("wheel done");
+    }, //end makeWheel
 
-	
-	var spoke1 = paper.path("M" + wheel1.centerx + "," + wheel1.centery + "L" + (wheel1.centerx + wheel1.radius) + "," + wheel1.centery);
-	console.log("spoke 1 created");
-	
-	console.log("rim1 created");
-	
-	wheel1.add(rim1);
-	wheel1.add(spoke1);
-	
-	console.log("wheel1 grouped");			
+    makeSpokes: function(wheel) {
+        if (wheel.spokeCount < 1) {
+            wheel.spokeCount = 1;
+        }
 
-	wheel1.attr({
-		fill: "#ffffff",
-		stroke: "#5555ff", 
-		strokeWidth: 2 
-	});
+        var spokeAngle = 0.0;
+        var spokeSpacing = (Math.PI * 2) / wheel.spokeCount;
+        console.log("About to create " + wheel.spokeCount + " spoke(s)")
+        for (var i = 0; i < wheel.spokeCount; i++) {
+            var spoke = this.makeSpoke(wheel, spokeAngle);
+            spokeAngle += spokeSpacing;
+            //add spoke to wheel
+            wheel.add(spoke);
+        }
 
+    },
 
+    makeSpoke: function(wheel, angleInRad) {
+        //make and return spokes
+        console.log("Creating spoke at angle: " + angleInRad);
+        var spokeLength = wheel.rimRadius;
 
-}
+        var spokeEndX = wheel.centerX + (Math.sin(angleInRad) * spokeLength);
+        var spokeEndY = wheel.centerY + (Math.cos(angleInRad) * spokeLength);
+        console.log("Spoke at angle: " + angleInRad + " and length: " + spokeLength + " ends at point: (" + spokeEndX + "," + spokeEndY + ")");
+        var spokePath =
+            "M" + wheel.centerX + "," + wheel.centerY +
+            "L" + spokeEndX + "," + spokeEndY;
+        var spoke = wheel.svgSpace.path(spokePath);
+        spoke.attr({
+            stroke: wheel.metalColor,
+            strokeWidth: 2
+        });
+        console.log("spoke created: " + spokePath);
+
+        return spoke;
+    }
+} //end bike
 

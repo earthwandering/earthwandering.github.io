@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <script src="/js/Snap.svg-0.3.0/dist/snap.svg.js"></script>
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="bicycle.js"></script>
+    <style type="text/css">
+        #svg {
+            width: 800px;
+            height: 400px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="text/javascript">
+        var wheel1;
+        var stop = false;
+
+        $(document).ready(function () {
+            console.log("Howdy log");
+
+            var paper = Snap("#svg");
+
+            //var bike = new bike();
+
+            wheel1 = bike.makeWheel(paper, 100, 100, 100, 32);
+
+        });
+
+    </script>
+</head>
+<body>
+<h3>
+    Wheel 1
+
+    <input type="button" value="Stop" onclick="stop = true;" />
+</h3>
+<svg id="svg"></svg>
+</body>
+</html>

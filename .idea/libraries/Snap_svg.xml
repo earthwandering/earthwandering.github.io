@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Snap.svg" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/js/Snap.svg-0.3.0/dist" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/js/Snap.svg-0.3.0/dist" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
