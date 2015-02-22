@@ -8,53 +8,71 @@ var bike = {
         return {"x": x, "y": y};
     },
 
-    makeBike: function(svgSpace, Xo, Yo) {
-        console.log("about to make bike.  Xo:" + Xo + ", Yo:" + Yo);
+    getBasicBikeParameters: function(Xo, Yo) {
+        var bp = {};
+        bp.Xo = Xo;
+        bp.Yo = Yo;
+        bp.frameColor = "#FF0000";
+        bp.frameAttrs = {stroke: bp.frameColor, strokeWidth: 10};
+        bp.axleY = Yo-50;
+        bp.topTubeY = Yo - 180;
 
-        var frameColor = "#FF0000";
+        bp.backAxleC = this.point(bp.Xo + 100, bp.axleY);
+        bp.frontAxleC = this.point(bp.Xo + 350, bp.axleY);
+        bp.seatJunctionC = this.point(bp.Xo + 185, bp.topTubeY);
+        bp.topTubeHeadJunctionC = this.point(bp.Xo + 305, bp.topTubeY);
+        bp.downTubeHeadJunctionC = this.point(bp.Xo + 308, bp.topTubeY + 25);
 
-        var axleY = Yo-50;
-        var backAxleC = this.point(Xo + 100, axleY);
-        var frontAxleC = this.point(Xo + 350, axleY);
+        bp.bottomBracketC = this.point(bp.Xo + 205, bp.axleY);
 
-        var topTubeY = Yo - 180;
-        var seatJunctionC = this.point(Xo + 185, topTubeY);
-        var topTubeHeadJunctionC = this.point(Xo + 305, topTubeY);
-        var downTubeHeadJunctionC = this.point(Xo + 308, topTubeY + 25);
+        return bp;
+    }, //end getBasicBikeParameters
 
-        var bottomBracketC = this.point(Xo + 205, axleY);
+    getPathStringFromPoints: function(point1, point2) {
+        return "M" + point1.x + "," + point1.y + "L" + point2.x + "," + point2.y
+    },
 
-        var wheel1 = bike.makeWheel(svgSpace, backAxleC.x, backAxleC.y, 90, 32);
-        var wheel2 = bike.makeWheel(svgSpace, frontAxleC.x, frontAxleC.y, 90, 32);
+    makeBasicBike: function(svgSpace, Xo, Yo) {
+        return this.makeBike(svgSpace, this.getBasicBikeParameters(Xo, Yo));
+    },
 
-        var seatStay = svgSpace.path("M" + backAxleC.x + "," + backAxleC.y + "L" + seatJunctionC.x + "," + seatJunctionC.y);
-        seatStay.attr({stroke: frameColor, strokeWidth: 10});
+    makeBike: function(svgSpace, bikeParameters) {
+        var bp = bikeParameters;
 
-        var chainStay = svgSpace.path("M" + backAxleC.x + "," + backAxleC.y + "L" + bottomBracketC.x + "," + bottomBracketC.y);
-        chainStay.attr({stroke: frameColor, strokeWidth: 10});
+        console.log("about to make bike.  Xo:" + bp.Xo + ", Yo:" + bp.Yo);
 
-        var topTube = svgSpace.path("M" + seatJunctionC.x + "," + seatJunctionC.y + "L" + topTubeHeadJunctionC.x + "," + topTubeHeadJunctionC.y);
-        topTube.attr({stroke: frameColor, strokeWidth: 10});
 
-        var downTube = svgSpace.path("M" + bottomBracketC.x + "," + bottomBracketC.y + "L" + downTubeHeadJunctionC.x + "," + downTubeHeadJunctionC.y);
-        downTube.attr({stroke: frameColor, strokeWidth: 10});
+        var wheel1 = bike.makeWheel(svgSpace, bp.backAxleC.x, bp.backAxleC.y, 90, 32);
+        var wheel2 = bike.makeWheel(svgSpace, bp.frontAxleC.x, bp.frontAxleC.y, 90, 32);
 
-        var seatTube = svgSpace.path("M" + bottomBracketC.x + "," + bottomBracketC.y + "L" + seatJunctionC.x + "," + seatJunctionC.y);
-        seatTube.attr({stroke: frameColor, strokeWidth: 10});
+        var seatStay = svgSpace.path(this.getPathStringFromPoints(bp.backAxleC, bp.seatJunctionC));
+        seatStay.attr(bp.frameAttrs);
 
-        var headTube = svgSpace.path("M" + topTubeHeadJunctionC.x + "," + topTubeHeadJunctionC.y + "L" + downTubeHeadJunctionC.x + "," + downTubeHeadJunctionC.y);
-        headTube.attr({stroke: frameColor, strokeWidth: 10});
+        var chainStay = svgSpace.path(this.getPathStringFromPoints(bp.backAxleC, bp.bottomBracketC));
+        chainStay.attr(bp.frameAttrs);
+
+        var topTube = svgSpace.path(this.getPathStringFromPoints(bp.seatJunctionC, bp.topTubeHeadJunctionC));
+        topTube.attr(bp.frameAttrs);
+
+        var downTube = svgSpace.path(this.getPathStringFromPoints(bp.bottomBracketC, bp.downTubeHeadJunctionC));
+        downTube.attr(bp.frameAttrs);
+
+        var seatTube = svgSpace.path(this.getPathStringFromPoints(bp.bottomBracketC, bp.seatJunctionC));
+        seatTube.attr(bp.frameAttrs);
+
+        var headTube = svgSpace.path(this.getPathStringFromPoints(bp.topTubeHeadJunctionC, bp.downTubeHeadJunctionC));
+        headTube.attr(bp.frameAttrs);
 
         var curveExaggeration = 10;
         var forkCurveString =
-            "M" + downTubeHeadJunctionC.x + "," + downTubeHeadJunctionC.y +
+            "M" + bp.downTubeHeadJunctionC.x + "," + bp.downTubeHeadJunctionC.y +
             "C" +
-            (downTubeHeadJunctionC.x - 2) + "," + (downTubeHeadJunctionC.y + curveExaggeration) + " " +
-            (frontAxleC.x - 2) + "," + (frontAxleC.y + curveExaggeration) + " " +
-            frontAxleC.x + "," + frontAxleC.y;
+            (bp.downTubeHeadJunctionC.x - 2) + "," + (bp.downTubeHeadJunctionC.y + curveExaggeration) + " " +
+            (bp.frontAxleC.x - 2) + "," + (bp.frontAxleC.y + curveExaggeration) + " " +
+            bp.frontAxleC.x + "," + bp.frontAxleC.y;
 
         var fork = svgSpace.path(forkCurveString);
-        fork.attr({"fill-opacity": 0.0, stroke: frameColor, strokeWidth: 10});
+        fork.attr({"fill-opacity": 0.0, stroke: bp.frameColor, strokeWidth: 10});
 
         bike.animateWheel(wheel1);
         bike.animateWheel(wheel2);
