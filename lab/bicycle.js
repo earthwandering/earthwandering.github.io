@@ -52,6 +52,7 @@ var bike = {
         this.makeSpokes(wheel);
 
         console.log("wheel done");
+        return wheel;
     }, //end makeWheel
 
     makeSpokes: function(wheel) {
@@ -90,6 +91,13 @@ var bike = {
         console.log("spoke created: " + spokePath);
 
         return spoke;
+    },
+
+    animateWheel: function(wheel, animationDelay) {
+        //console.log("Wheel angle: " + wheel1.angle);
+
+        wheel.animate({ transform: 'r360,' + wheel.centerX + ',' + wheel.centerY}, 1000, mina.bounce );
+
     }
 } //end bike
 

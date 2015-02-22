@@ -12,17 +12,12 @@
         }
     </style>
     <script type="text/javascript">
-        var wheel1;
-        var stop = false;
-
         $(document).ready(function () {
             console.log("Howdy log");
 
             var paper = Snap("#svg");
-
-            //var bike = new bike();
-
-            wheel1 = bike.makeWheel(paper, 100, 100, 100, 32);
+            var wheel1 = bike.makeWheel(paper, 100, 100, 90, 32);
+            bike.animateWheel(wheel1, 1000);
 
         });
 
