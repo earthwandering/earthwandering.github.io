@@ -3,33 +3,25 @@ Requires snap.svg
 */
 
 var bicycle = {
+    fullDebugOn: false,
 
-    point: function(x, y) {
-        return {
-            "x": x,
-            "y": y,
-            toString: function () {
-                return "(" + this.x + "," + this.y + ")";
-            },
-            addPoint: function (point2) {
-                return bicycle.point(this.x + point2.x, this.y + point2.y);
-            }
-        }
+    makeBasicBike: function(svgSpace, Xo, Yo) {
+        return this.makeBike(svgSpace, this.getBasicBikeParameters(Xo, Yo));
     },
 
     getBasicBikeParameters: function(Xo, Yo) {
         var bp = {};
         bp.Xo = Xo;
         bp.Yo = Yo;
-        bp.frameColor = "#FF0000";
-        bp.bareMetal = "#CCCCCC";
-        bp.frameThickness = 10;
+        bp.frameColor = !this.fullDebugOn ? "#FF0000" : "#555555";
+        bp.bareMetal = !this.fullDebugOn ? "#AAAAAA" : "#333333";
+        bp.frameThickness = !this.fullDebugOn ? 8 : 1;
         bp.frameAttrs = {stroke: bp.frameColor, strokeWidth: bp.frameThickness};
         bp.axleY = Yo-50;
         bp.topTubeY = Yo - 180;
 
         bp.backAxleC = this.point(bp.Xo + 100, bp.axleY);
-        bp.frontAxleC = this.point(bp.Xo + 375, bp.axleY);
+        bp.frontAxleC = this.point(bp.Xo + 373, bp.axleY);
         bp.seatJunctionC = this.point(bp.Xo + 190, bp.topTubeY);
         bp.bottomBracketC = this.point(bp.Xo + 210, bp.axleY);
 
@@ -40,10 +32,6 @@ var bicycle = {
 
         return bp;
     }, //end getBasicBikeParameters
-
-    getPathStringFromPoints: function(point1, point2) {
-        return "M" + point1.x + "," + point1.y + "L" + point2.x + "," + point2.y
-    },
 
     generateSeat: function(bikeSvg, seatPostC) {
         var x = seatPostC.x;
@@ -78,7 +66,7 @@ var bicycle = {
         var bp = bikeSvg.bikeParameters;
         var handlebars = bikeSvg.svgSpace.group();
 
-        var stemEndC = this.point((stemC.x + 20),(stemC.y - 3));
+        var stemEndC = this.point((stemC.x + 25),(stemC.y - 8));
         var stemTop = bikeSvg.svgSpace.path(this.getPathStringFromPoints(stemC, stemEndC));
         stemTop.attr({stroke: bp.bareMetal, strokeWidth: (bp.frameThickness - 2)});
         handlebars.add(stemTop);
@@ -87,12 +75,31 @@ var bicycle = {
         stemJoint.attr({stroke: bp.bareMetal, fill: bp.bareMetal});
         handlebars.add(stemJoint);
 
-        //var drops = bikeSvg.svgSpace.path("M")
-        return handlebars;
-    },
+        var c1 = this.point((stemEndC.x + 35), (stemEndC.y - 10));
+        var c2 = this.point((stemEndC.x + 45), (stemEndC.y + 40));
+        var p2 = this.point((stemEndC.x + 10), (stemEndC.y + 40));
 
-    makeBasicBike: function(svgSpace, Xo, Yo) {
-        return this.makeBike(svgSpace, this.getBasicBikeParameters(Xo, Yo));
+        var drops = this.generateCurve(bikeSvg.svgSpace, stemEndC, c1, c2, p2, false);
+        drops.attr({stroke: "#333333", "fill-opacity": 0.0, strokeWidth: (bp.frameThickness - 2)});
+        handlebars.add(drops);
+
+        var hoodP1 = this.point((stemEndC.x + 24), (stemEndC.y + 4));
+        var hoodP2 = this.point((stemEndC.x + 33), (stemEndC.y - 6));
+
+        var brakeStartC = hoodP2.addCoords(-1, 1);
+        var brakeC1 = brakeStartC.addCoords(9, 8);
+        var brakeEndC = brakeStartC.addCoords(10, 30);
+        var brakeC2 = brakeEndC.addCoords(3, -15);
+
+        var brakeLever = this.generateCurve(bikeSvg.svgSpace, brakeStartC, brakeC1, brakeC2, brakeEndC);
+        brakeLever.attr({stroke: bp.bareMetal, strokeWidth: 3, "fill-opacity": 0.0});
+        handlebars.add(brakeLever);
+
+        var hoods = bikeSvg.svgSpace.path(this.getPathStringFromPoints(hoodP1, hoodP2));
+        hoods.attr({stroke: "#000000", strokeWidth: 10});
+        handlebars.add(hoods);
+
+        return handlebars;
     },
 
     makeBike: function(svgSpace, bikeParameters) {
@@ -126,7 +133,7 @@ var bicycle = {
         var seat = this.generateSeat(bikeSvg, seatPostTopC);
         bikeSvg.add(seat);
 
-        var stemTopC = this.getPointOnParallelLine(bp.topTubeHeadJunctionC, 30, bp.downTubeHeadJunctionC, bp.topTubeHeadJunctionC);
+        var stemTopC = this.getPointOnParallelLine(bp.topTubeHeadJunctionC, 33, bp.downTubeHeadJunctionC, bp.topTubeHeadJunctionC);
         var stem = svgSpace.path(this.getPathStringFromPoints(bp.topTubeHeadJunctionC, stemTopC));
         stem.attr({stroke: bp.bareMetal, strokeWidth: bp.frameThickness - 2});
         bikeSvg.add(stem);
@@ -150,15 +157,9 @@ var bicycle = {
         headTube.attr(bp.frameAttrs);
         bikeSvg.add(headTube);
 
-        var curveExaggeration = 10;
-        var forkCurveString =
-            "M" + bp.downTubeHeadJunctionC.x + "," + bp.downTubeHeadJunctionC.y +
-            "C" +
-            (bp.downTubeHeadJunctionC.x - 2) + "," + (bp.downTubeHeadJunctionC.y + curveExaggeration) + " " +
-            (bp.frontAxleC.x - 2) + "," + (bp.frontAxleC.y + curveExaggeration) + " " +
-            bp.frontAxleC.x + "," + bp.frontAxleC.y;
-
-        var fork = svgSpace.path(forkCurveString);
+        var forkC1 = this.point((bp.downTubeHeadJunctionC.x + 7), (bp.downTubeHeadJunctionC.y + 50));
+        var forkC2 = this.point((bp.frontAxleC.x - 20), (bp.frontAxleC.y - 20));
+        var fork = this.generateCurve(svgSpace, bp.downTubeHeadJunctionC, forkC1, forkC2, bp.frontAxleC, false);
         fork.attr({"fill-opacity": 0.0, stroke: bp.frameColor, strokeWidth: bp.frameThickness});
         bikeSvg.add(fork);
 
@@ -167,25 +168,6 @@ var bicycle = {
         bicycle.animateWheel(wheel1);
         bicycle.animateWheel(wheel2);
     }, //makeBike
-
-    /**
-     * TODO: This is a first attempt implementing this one.  I'll need to check it later
-     * @param startPoint
-     * @param length
-     * @param targetPoint1
-     * @param targetPoint2
-     * @returns {*}
-     */
-    getPointOnParallelLine: function(startPoint, length, targetPoint1, targetPoint2) {
-        var slope = Math.atan((targetPoint2.x - targetPoint1.x)/(targetPoint2.y - targetPoint1.y));
-
-        var change = this.point(-(Math.sin(slope) * length), -(Math.cos(slope) * length));
-
-        var result = startPoint.addPoint(change);
-        console.log("slope:" + slope + " change:" + change + " result: " + result + " start:" + startPoint);
-
-        return result;
-    },
 
     /**
      * @param svgSpace as Snap
@@ -283,6 +265,71 @@ var bicycle = {
 
         wheel.animate({ transform: 'r360,' + wheel.centerX + ',' + wheel.centerY}, 1000, mina.bounce );
 
+    },
+
+    /**
+     * TODO: This is a first attempt implementing this one.  I'll need to check it later
+     * @param startPoint
+     * @param length
+     * @param targetPoint1
+     * @param targetPoint2
+     * @returns {*}
+     */
+    getPointOnParallelLine: function(startPoint, length, targetPoint1, targetPoint2) {
+        var slope = Math.atan((targetPoint2.x - targetPoint1.x)/(targetPoint2.y - targetPoint1.y));
+
+        var change = this.point(-(Math.sin(slope) * length), -(Math.cos(slope) * length));
+
+        var result = startPoint.addPoint(change);
+        console.log("slope:" + slope + " change:" + change + " result: " + result + " start:" + startPoint);
+
+        return result;
+    },
+
+    getPathStringFromPoints: function(point1, point2) {
+        return "M" + point1.x + "," + point1.y + "L" + point2.x + "," + point2.y
+    },
+
+    generateCurve: function(svgSpace, p1, c1, c2, p2, debugOn) {
+        console.log("Received curve points. p1:" + p1 + " p2:" + p2 + " c1:" + c1 + " c2:" + c2);
+
+        var pathString =
+            "M" + p1.x + "," + p1.y +
+            "C" + c1.x + "," + c1.y +
+            " " + c2.x + "," + c2.y +
+            " " + p2.x + "," + p2.y;
+
+        console.log("Creating curve with path: " + pathString);
+
+        var curve = svgSpace.path(pathString);
+
+        if (debugOn || this.fullDebugOn) {
+            console.log("Showing debug lines");
+            var cLine1 = svgSpace.path(this.getPathStringFromPoints(p1, c1));
+            cLine1.attr({stroke: "#FF0000", strokeWidth: 1});
+
+            var cLine2 = svgSpace.path(this.getPathStringFromPoints(p2, c2));
+            cLine2.attr({stroke: "#FF0000", strokeWidth: 1});
+        }
+        return curve;
+    },
+
+    point: function(x, y) {
+        return {
+            "x": x,
+            "y": y,
+            toString: function () {
+                return "(" + this.x + "," + this.y + ")";
+            },
+            addPoint: function (point2) {
+                return bicycle.point(this.x + point2.x, this.y + point2.y);
+            },
+            addCoords: function(x2, y2) {
+                return bicycle.point(this.x + x2, this.y + y2);
+            }
+        }
     }
+
+
 } //end bicycle
 
