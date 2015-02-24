@@ -28,15 +28,14 @@ var bicycle = {
         bp.topTubeY = Yo - 180;
 
         bp.backAxleC = this.point(bp.Xo + 100, bp.axleY);
-        bp.frontAxleC = this.point(bp.Xo + 350, bp.axleY);
-        bp.seatJunctionC = this.point(bp.Xo + 185, bp.topTubeY);
-        bp.topTubeHeadJunctionC = this.point(bp.Xo + 305, bp.topTubeY);
-        bp.downTubeHeadJunctionC = this.point(bp.Xo + 308, bp.topTubeY + 25);
+        bp.frontAxleC = this.point(bp.Xo + 375, bp.axleY);
+        bp.seatJunctionC = this.point(bp.Xo + 190, bp.topTubeY);
+        bp.bottomBracketC = this.point(bp.Xo + 210, bp.axleY);
 
-        bp.bottomBracketC = this.point(bp.Xo + 205, bp.axleY);
+        bp.topTubeHeadJunctionC = this.point(bp.Xo + 335, bp.topTubeY);
+        bp.downTubeHeadJunctionC = this.point(bp.Xo + 338, bp.topTubeY + 25);
 
         bp.junctions = [bp.backAxleC, bp.frontAxleC, bp.seatJunctionC, bp.topTubeHeadJunctionC, bp.downTubeHeadJunctionC, bp.bottomBracketC];
-
 
         return bp;
     }, //end getBasicBikeParameters
@@ -49,7 +48,17 @@ var bicycle = {
         var x = seatPostC.x;
         var y = seatPostC.y;
 
-        return bikeSvg.svgSpace.path(
+        var seat = bikeSvg.svgSpace.group();
+
+        var rail = bikeSvg.svgSpace.path(
+            "M" + x + "," + (y - 2) +
+            "L" + (x - 15) + "," + (y - 4) +
+            "L" + (x - 20) + "," + (y - 18)
+        );
+        rail.attr({strokeWidth: 2, stroke: "#555555", "fill-opacity": 0.0});
+        seat.add(rail);
+
+        var saddle = bikeSvg.svgSpace.path(
             "M" + x + "," + y + //start at post
                 "L" + (x + 41) + "," + (y - 11) + //bottom edge of front
                 "L" + (x + 43) + "," + (y - 15) + //top edge of front
@@ -58,8 +67,16 @@ var bicycle = {
                 "L" + (x - 22) + "," + (y - 18) +
                 "Z"
         );
+        saddle.attr({stroke: "#000000", strokeWidth: 2, fill: "#333333"});
+        seat.add(saddle);
+
+        return seat;
     },
 
+    generateHandlebars: function(bikeSvg, seatPostC) {
+
+
+    },
 
     makeBasicBike: function(svgSpace, Xo, Yo) {
         return this.makeBike(svgSpace, this.getBasicBikeParameters(Xo, Yo));
@@ -88,13 +105,12 @@ var bicycle = {
         chainStay.attr(bp.frameAttrs);
         bikeSvg.add(chainStay);
 
-        var seatPostTopC = this.getPointOnParallelLine(bp.seatJunctionC, 50, bp.bottomBracketC, bp.seatJunctionC);
+        var seatPostTopC = this.getPointOnParallelLine(bp.seatJunctionC, 40, bp.bottomBracketC, bp.seatJunctionC);
         var seatPost = svgSpace.path(this.getPathStringFromPoints(bp.seatJunctionC, seatPostTopC))
         seatPost.attr({stroke: "#CCCCCC", strokeWidth: bp.frameThickness - 2});
         bikeSvg.add(seatPost);
 
         var seat = this.generateSeat(bikeSvg, seatPostTopC);
-        seat.attr({stroke: "#000000", strokeWidth: 2, fill: "#333333"});
         bikeSvg.add(seat);
 
         var stemTopC = this.getPointOnParallelLine(bp.topTubeHeadJunctionC, 30, bp.downTubeHeadJunctionC, bp.topTubeHeadJunctionC);
