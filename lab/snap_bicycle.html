@@ -12,11 +12,12 @@
         }
     </style>
     <script type="text/javascript">
+        var bikeSvg;
         $(document).ready(function () {
             console.log("Howdy log");
 
             var paper = Snap("#svg");
-            bike.makeBasicBike(paper, 10, 250)
+            bikeSvg = bicycle.makeBasicBike(paper, 10, 250)
 
         });
 
