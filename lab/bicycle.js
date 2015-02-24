@@ -22,6 +22,7 @@ var bicycle = {
         bp.Xo = Xo;
         bp.Yo = Yo;
         bp.frameColor = "#FF0000";
+        bp.bareMetal = "#CCCCCC";
         bp.frameThickness = 10;
         bp.frameAttrs = {stroke: bp.frameColor, strokeWidth: bp.frameThickness};
         bp.axleY = Yo-50;
@@ -62,7 +63,7 @@ var bicycle = {
             "M" + x + "," + y + //start at post
                 "L" + (x + 41) + "," + (y - 11) + //bottom edge of front
                 "L" + (x + 43) + "," + (y - 15) + //top edge of front
-                "L" + (x + 5) + "," + (y - 17) + //middle of saddle top
+                "L" + (x + 7) + "," + (y - 15) + //middle of saddle top
                 "L" + (x - 20) + "," + (y - 20) + // top of back
                 "L" + (x - 22) + "," + (y - 18) +
                 "Z"
@@ -73,9 +74,21 @@ var bicycle = {
         return seat;
     },
 
-    generateHandlebars: function(bikeSvg, seatPostC) {
+    generateHandlebars: function(bikeSvg, stemC) {
+        var bp = bikeSvg.bikeParameters;
+        var handlebars = bikeSvg.svgSpace.group();
 
+        var stemEndC = this.point((stemC.x + 20),(stemC.y - 3));
+        var stemTop = bikeSvg.svgSpace.path(this.getPathStringFromPoints(stemC, stemEndC));
+        stemTop.attr({stroke: bp.bareMetal, strokeWidth: (bp.frameThickness - 2)});
+        handlebars.add(stemTop);
 
+        var stemJoint = bikeSvg.svgSpace.circle(stemC.x, stemC.y,((bp.frameThickness - 2)/2));
+        stemJoint.attr({stroke: bp.bareMetal, fill: bp.bareMetal});
+        handlebars.add(stemJoint);
+
+        //var drops = bikeSvg.svgSpace.path("M")
+        return handlebars;
     },
 
     makeBasicBike: function(svgSpace, Xo, Yo) {
@@ -107,7 +120,7 @@ var bicycle = {
 
         var seatPostTopC = this.getPointOnParallelLine(bp.seatJunctionC, 40, bp.bottomBracketC, bp.seatJunctionC);
         var seatPost = svgSpace.path(this.getPathStringFromPoints(bp.seatJunctionC, seatPostTopC))
-        seatPost.attr({stroke: "#CCCCCC", strokeWidth: bp.frameThickness - 2});
+        seatPost.attr({stroke: bp.bareMetal, strokeWidth: bp.frameThickness - 2});
         bikeSvg.add(seatPost);
 
         var seat = this.generateSeat(bikeSvg, seatPostTopC);
@@ -115,8 +128,11 @@ var bicycle = {
 
         var stemTopC = this.getPointOnParallelLine(bp.topTubeHeadJunctionC, 30, bp.downTubeHeadJunctionC, bp.topTubeHeadJunctionC);
         var stem = svgSpace.path(this.getPathStringFromPoints(bp.topTubeHeadJunctionC, stemTopC));
-        stem.attr({stroke: "#CCCCCC", strokeWidth: bp.frameThickness - 2});
+        stem.attr({stroke: bp.bareMetal, strokeWidth: bp.frameThickness - 2});
         bikeSvg.add(stem);
+
+        var handlebars = this.generateHandlebars(bikeSvg, stemTopC);
+        bikeSvg.add(handlebars);
 
         var topTube = svgSpace.path(this.getPathStringFromPoints(bp.seatJunctionC, bp.topTubeHeadJunctionC));
         topTube.attr(bp.frameAttrs);
