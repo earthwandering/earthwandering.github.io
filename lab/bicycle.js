@@ -10,13 +10,13 @@ var bicycle = {
     },
 
     getBasicBikeParameters: function(Xo, Yo) {
+        console.log("creating bike paramets with Xo: " + Xo);
         var bp = {};
         bp.Xo = Xo;
         bp.Yo = Yo;
         bp.frameColor = !this.fullDebugOn ? "#FF0000" : "#555555";
         bp.bareMetal = !this.fullDebugOn ? "#AAAAAA" : "#333333";
         bp.frameThickness = !this.fullDebugOn ? 8 : 1;
-        bp.frameAttrs = {stroke: bp.frameColor, strokeWidth: bp.frameThickness};
         bp.axleY = Yo-50;
         bp.topTubeY = Yo - 180;
 
@@ -32,6 +32,10 @@ var bicycle = {
 
         return bp;
     }, //end getBasicBikeParameters
+
+    getFrameAttrs: function(bp) {
+       return {stroke: bp.frameColor, strokeWidth: bp.frameThickness};
+    },
 
     generateSeat: function(bikeSvg, seatPostC) {
         var x = seatPostC.x;
@@ -102,8 +106,16 @@ var bicycle = {
         return handlebars;
     },
 
-    makeBike: function(svgSpace, bikeParameters) {
+    makeBike: function(bikeParameters, svgSpace) {
         var bp = bikeParameters;
+
+        console.log("svgSpace: " + svgSpace)
+        if (svgSpace == undefined || svgSpace == null) {
+            console.log("svgSpace not provided.  Trying to find an svg tag and use that");
+            svgSpace = Snap("svg");
+        } else {
+            console.log("svgSpace provided by caller");
+        }
 
         var bikeSvg = svgSpace.group();
         bikeSvg.svgSpace = svgSpace;
@@ -118,11 +130,11 @@ var bicycle = {
         bikeSvg.add(wheel2);
 
         var seatStay = svgSpace.path(this.getPathStringFromPoints(bp.backAxleC, bp.seatJunctionC));
-        seatStay.attr(bp.frameAttrs);
+        seatStay.attr(this.getFrameAttrs(bp));
         bikeSvg.add(seatStay);
 
         var chainStay = svgSpace.path(this.getPathStringFromPoints(bp.backAxleC, bp.bottomBracketC));
-        chainStay.attr(bp.frameAttrs);
+        chainStay.attr(this.getFrameAttrs(bp));
         bikeSvg.add(chainStay);
 
         var seatPostTopC = this.getPointOnParallelLine(bp.seatJunctionC, 40, bp.bottomBracketC, bp.seatJunctionC);
@@ -142,19 +154,19 @@ var bicycle = {
         bikeSvg.add(handlebars);
 
         var topTube = svgSpace.path(this.getPathStringFromPoints(bp.seatJunctionC, bp.topTubeHeadJunctionC));
-        topTube.attr(bp.frameAttrs);
+        topTube.attr(this.getFrameAttrs(bp));
         bikeSvg.add(topTube);
 
         var downTube = svgSpace.path(this.getPathStringFromPoints(bp.bottomBracketC, bp.downTubeHeadJunctionC));
-        downTube.attr(bp.frameAttrs);
+        downTube.attr(this.getFrameAttrs(bp));
         bikeSvg.add(downTube);
 
         var seatTube = svgSpace.path(this.getPathStringFromPoints(bp.bottomBracketC, bp.seatJunctionC));
-        seatTube.attr(bp.frameAttrs);
+        seatTube.attr(this.getFrameAttrs(bp));
         bikeSvg.add(seatTube)
 
         var headTube = svgSpace.path(this.getPathStringFromPoints(bp.topTubeHeadJunctionC, bp.downTubeHeadJunctionC));
-        headTube.attr(bp.frameAttrs);
+        headTube.attr(this.getFrameAttrs(bp));
         bikeSvg.add(headTube);
 
         var forkC1 = this.point((bp.downTubeHeadJunctionC.x + 7), (bp.downTubeHeadJunctionC.y + 50));
@@ -177,7 +189,7 @@ var bicycle = {
      * @param spokeCount as Number
      */
     makeWheel: function(svgSpace, Xo, Yo, R, spokeCount) {
-        console.log("Building wheel: Xo:" + Xo + ", Yo:" + Yo + ", R:" + R + ", spokeCount:" + spokeCount);
+        //console.log("Building wheel: Xo:" + Xo + ", Yo:" + Yo + ", R:" + R + ", spokeCount:" + spokeCount);
         var wheel = svgSpace.group();
 
         wheel.svgSpace = svgSpace;
@@ -198,7 +210,7 @@ var bicycle = {
             strokeWidth: 2
         });
         wheel.add(rim);
-        console.log("rim created");
+        //console.log("rim created");
 
         var tire = svgSpace.circle(wheel.centerX, wheel.centerY, wheel.radius);
         tire.attr({
@@ -207,11 +219,11 @@ var bicycle = {
             strokeWidth: wheel.tireWidth
         });
         wheel.add(tire);
-        console.log("tire created");
+        //console.log("tire created");
 
         this.makeSpokes(wheel);
 
-        console.log("wheel done");
+        //console.log("wheel done");
         return wheel;
     }, //end makeWheel
 
@@ -230,7 +242,7 @@ var bicycle = {
 
         var spokeAngle = 0.0;
         var spokeSpacing = (Math.PI * 2) / wheel.spokeCount;
-        console.log("About to create " + wheel.spokeCount + " spoke(s)")
+        //console.log("About to create " + wheel.spokeCount + " spoke(s)")
         for (var i = 0; i < wheel.spokeCount; i++) {
             var spoke = this.makeSpoke(wheel, spokeAngle);
             spokeAngle += spokeSpacing;
@@ -241,12 +253,12 @@ var bicycle = {
 
     makeSpoke: function(wheel, angleInRad) {
         //make and return spokes
-        console.log("Creating spoke at angle: " + angleInRad);
+        //console.log("Creating spoke at angle: " + angleInRad);
         var spokeLength = wheel.rimRadius;
 
         var spokeEndX = wheel.centerX + (Math.sin(angleInRad) * spokeLength);
         var spokeEndY = wheel.centerY + (Math.cos(angleInRad) * spokeLength);
-        console.log("Spoke at angle: " + angleInRad + " and length: " + spokeLength + " ends at point: (" + spokeEndX + "," + spokeEndY + ")");
+        //console.log("Spoke at angle: " + angleInRad + " and length: " + spokeLength + " ends at point: (" + spokeEndX + "," + spokeEndY + ")");
         var spokePath =
             "M" + wheel.centerX + "," + wheel.centerY +
             "L" + spokeEndX + "," + spokeEndY;
@@ -255,7 +267,7 @@ var bicycle = {
             stroke: wheel.metalColor,
             strokeWidth: 2
         });
-        console.log("spoke created: " + spokePath);
+        //console.log("spoke created: " + spokePath);
 
         return spoke;
     },
@@ -281,7 +293,7 @@ var bicycle = {
         var change = this.point(-(Math.sin(slope) * length), -(Math.cos(slope) * length));
 
         var result = startPoint.addPoint(change);
-        console.log("slope:" + slope + " change:" + change + " result: " + result + " start:" + startPoint);
+        //console.log("slope:" + slope + " change:" + change + " result: " + result + " start:" + startPoint);
 
         return result;
     },
@@ -291,7 +303,7 @@ var bicycle = {
     },
 
     generateCurve: function(svgSpace, p1, c1, c2, p2, debugOn) {
-        console.log("Received curve points. p1:" + p1 + " p2:" + p2 + " c1:" + c1 + " c2:" + c2);
+        //console.log("Received curve points. p1:" + p1 + " p2:" + p2 + " c1:" + c1 + " c2:" + c2);
 
         var pathString =
             "M" + p1.x + "," + p1.y +
@@ -299,7 +311,7 @@ var bicycle = {
             " " + c2.x + "," + c2.y +
             " " + p2.x + "," + p2.y;
 
-        console.log("Creating curve with path: " + pathString);
+        //console.log("Creating curve with path: " + pathString);
 
         var curve = svgSpace.path(pathString);
 
