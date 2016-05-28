@@ -31,11 +31,13 @@
 			$('.bg').parallax("50%", speedFactor);
 			$('#rsvp').parallax("50%", speedFactor);
 			$('#pictures').parallax("50%", speedFactor);
-						
-			var bp = bicycle.getBasicBikeParameters(10,10);
-			console.log("About to build bike with frameColor: " + bp.frameColor);
-			console.log("Xo: " + bp.Xo);
-			bicycle.makeBike(bp);
+
+			function runBicycle() {
+				var bp = bicycle.getBasicBikeParameters(10,10);
+				console.log("About to build bike with frameColor: " + bp.frameColor);
+				console.log("Xo: " + bp.Xo);
+				bicycle.makeBike(bp);
+			}
 
 		})
 		</script>
@@ -157,7 +159,6 @@
 	</div> <!--#rsvp-->
 
 	<div id="pictures">
-		<svg id="bicycleLeft" class="bicycle"></svg>
 
 		<div class="story"><div class="bg"></div>
 	    	<div class="float-right">
@@ -172,10 +173,18 @@
           <p>
           Pour voir notre album photo Flickr de notre petit Mariage tenu le 27 Mars 2016, clickez 
             <a href="https://www.flickr.com/photos/earthwandering/albums/72157666469547516">ici</a>.
-            </P
-            
-	        </div>
+					</p>
+
+				</div>
 	    </div> <!--.story-->
+
+		<!--
+    <p>
+      <a href="#" onclick="javascript:runBicycle()">Jon thinks you should click this</a>
+    </p>
+		<svg id="bicycleLeft" class="bicycle"></svg>
+    -->
+
 	</div> <!--#rsvp-->
 
 
