@@ -17,6 +17,23 @@ body{
     padding: 0;
 }
 
+.bicycle {
+	border: 1px solid black;
+	width: 80px;
+	height: 40px;
+	position: absolute;
+	top: 15em;
+}
+
+#bicycleLeft {
+	left: 10px;
+}
+
+#bicycleRight {
+	right: 10px;
+}
+
+
 p{
     margin: 0 0 20px 0;
 }
@@ -78,6 +95,8 @@ h2{
     width: 100%;
     opacity: 0.8;
     z-index: 300;
+    text-align: center;
+    padding-left: 0px;
 }
 
 #nav li a{
@@ -89,11 +108,25 @@ h2{
 #nav h3, #nav a, #nav li {
     margin: 0px;
     display: inline-block;
-    padding: 15px 10px 15px 10px;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
 }
 
 #header, #intro, #travel, #event, #pictures, #rsvp{
     width: 100%;
+}
+
+#intro h1, #intro h2 {
+	margin: .05em;
+}
+
+#intro h2 {
+	color: #444444;
+}
+
+
+#topTitle {
+	margin-top: 1.2em !important;
 }
 
 #event{
@@ -104,7 +137,7 @@ h2{
 }
 
 #travel{
-    background: url(images/champagne.png) 50% 0 no-repeat fixed;
+    background: url(images/travel_stepho.jpg) 50% 0 no-repeat fixed;
     background-size: 100% auto;
     margin: 0 auto;
     padding: 0;
@@ -159,4 +192,8 @@ h2{
         width: 600px;
         padding: 100px;
     }
+}
+
+.address{
+	font-weight: bold;
 }

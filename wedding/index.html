@@ -10,7 +10,12 @@
 		<script type="text/javascript" src="scripts/jquery.parallax-1.1.3.js"></script>
 		<script type="text/javascript" src="scripts/jquery.localscroll-1.2.7-min.js"></script>
 		<script type="text/javascript" src="scripts/jquery.scrollTo-1.4.2-min.js"></script>
-		<script type="text/javascript">
+
+    <script src="scripts/snap.svg.js"></script>
+    <script src="scripts/bicycle.js"></script>
+    <script src="scripts/bike_builder.js"></script>
+
+		<script type="text/javascript">		
 		$(document).ready(function(){
 			$('#nav').localScroll(800);
 	
@@ -26,6 +31,11 @@
 			$('.bg').parallax("50%", speedFactor);
 			$('#rsvp').parallax("50%", speedFactor);
 			$('#pictures').parallax("50%", speedFactor);
+						
+			var bp = bicycle.getBasicBikeParameters(10,10);
+			console.log("About to build bike with frameColor: " + bp.frameColor);
+			console.log("Xo: " + bp.Xo);
+			bicycle.makeBike(bp);
 
 		})
 		</script>
@@ -36,23 +46,24 @@
 	<body>
 	
     <ul id="nav">
-		  <li><a href="#event" title="Event Details"><h3>Event Details<br />Détails de l'événement</h3></a> </li>
-	    <li><a href="#travel" title="Travel Details"><h3>Travel Details<br />Renseignements par le voyage</h3></a></li>
-	    <li><a href="#rsvp" title="Confirm Your Presence"><h3>Confirm<br />Confirmez votre présence</h3></a></li>
-	  </ul>
+		<li><a href="#event" title="Event Details"><h3>Event Details<br />Détails de l'événement</h3></a> </li>
+	    <li><a href="#travel" title="Travel Details"><h3>Travel Details<br />Renseignements pour le voyage</h3></a></li>
+	    <li><a href="#rsvp" title="Confirm Your Presence"><h3>Confirm your presence<br />Confirmer votre présence</h3></a></li>
+	</ul>
 
 
 	<div id="intro">
 		<div class="story"><div class="bg"></div>
-	    	<div class="center">
 
-					<h2>Célébration de Marriage de</h2>
-					<h1>Jon & Steph<span class="smallish">'s</span></h1>
-					<h2>Wedding Celebration</h2>
-					
-					<h3>August 27th 2016 - 27 Août 2016</h3>
+			<div class="center">
 
-				</div>
+				<h2 id="topTitle">Célébration de Mariage de</h2>
+				<h1>Jon & Steph<span class="smallish">'s</span></h1>
+				<h2>Wedding Celebration</h2>
+				
+				<h3>August 27th 2016 - 27 Août 2016</h3>
+
+			</div>
 		</div> <!--.story-->
 	</div> <!--#intro-->
 
@@ -64,7 +75,7 @@
           <h2>EVENT DETAILS - DÉTAILS DE L’ÉVÉNEMENT</h2>
 
           <p>
-            The Ceremony is going to take place on the 27th of August, in Port Townsend, WA. The location will be within city limit, likely very close from our land. We are finishing the last of the details to rent and will update the location here when as soon as it becomes official. 
+            The Ceremony is going to take place on the 27th of August 2016, in a beautiful Scout cabin located just across the street from our land. The address is <span class="address">3075 Discovery Road, Port Townsend, WA, 98368</span>.
           </p>
           <p>
             We are aiming for a small party with a good selection of people that we value very much. We tend to live simply, therefore we imagine our Wedding Celebration to be beautiful, simple and fun in the same way. There should be music (if you can play anything, we would love to hear you play), silly dancing and hopefully some actual dancing too.
@@ -76,14 +87,14 @@
           <hr />
 
           <p>
-            La cérémonie se tiendra le 27 Aout prochain, à Port Townsend, WA. Elle se déroulera à l'intérieur des limites de la ville, très probablement, tout près de notre terrain. Nous sommes dans le processus de louer un établissement pour la cérémonie, l'endroit exact sera publié ici dès que c'est officiel. 
+            La cérémonie se tiendra le 27 Août 2016, à Port Townsend, WA. Elle se déroulera dans un chalet de Scout, situé juste en face de notre terrain. L'adresse exacte est le <span class="address">3075 Discovery Road, Port Townsend, WA, 98368</span>.
           </p>
           <p>
-            Nous souhaitons un petit party avec des gens qu'on aime particulièrement. On tend a vivre simplement, c’est pourquoi nous imaginons notre Celebration de Mariage belle, simple et sympa de la même façon. Il devrait y avoir de la musique (si vous pouvez jouer, nous aimerions vous entendre jouer), de la danse 
+            Nous souhaitons un petit party avec des gens qu'on aime particulièrement. On tend à vivre simplement, c’est pourquoi nous imaginons notre Celebration de Mariage belle, simple et sympa de la même façon. Il devrait y avoir de la musique (si vous pouvez jouer, nous aimerions vous entendre jouer), de la danse 
             <a href="http://www.urbandictionary.com/define.php?term=silly">"silly"</a> ains que, on l’espere, de la vraie dance.
           </p>
           <p>
-            Si la récolte de blé d’inde est commencé lorsque nous tiendrons notre célébraion, nous aimerions avoir notre celebration type Épluchette de blé d’inde, avec du bé d’inde frais, de la musique, un feu de camp, des drinks, des moustique des gens sympa, etc. Si la recolte n’étais pas prête à la fin aout, notre plan B consiste en un festin type “potluck” ou tous essaient d'amener un plat simple sans trop se casser la tete. Nous voulons que cette celebration soit sympa pour tout le monde. Si le “potluck: vous embête, amenez votre plus beau sourire et on sera heureux :-)
+            Si la récolte de blé d’inde est commencé lorsque nous tiendrons notre célébration, nous aimerions cette celebration dans le genre Épluchette de blé d’inde, avec du blé d’inde frais, de la musique, un feu de camp, des drinks, des moustique, des gens sympa, etc. Si la recolte n’étais pas prête à la fin août, notre plan B consiste en un festin type “potluck” ou tous essaient d'amener un plat simple sans trop se casser la tête. Nous voulons que cette celebration soit sympa pour tout le monde. Si le “potluck" vous embête, amenez votre plus beau sourire et on sera heureux :-)
           </p>
 
         </div>
@@ -98,30 +109,24 @@
           <h2>TRAVEL DETAILS - RENSEIGNEMENTS POUR LE VOYAGE</h2>
 
           <p>
-  	        For anyone going to fly, likely to SEATAC (Seattle and Tacoma airport): note that Port Townsend is on a peninsula (Olympic peninsula) and getting from SEATAC airport to Port Townsend could take a while, especially if not aware of schedules for the various ways to get here.
+  	        For anyone going to fly, likely to SEATAC (Seattle and Tacoma airport): note that Port Townsend is on a peninsula (Olympic peninsula) and getting from SEATAC airport to Port Townsend could take a while, especially if not aware of schedules for the various ways to get here. We are happy to help you plan this out by any ways. 
           </p>
           <p>
-	          For reference, this is what the map look like between SEATAC and Port Townsend: 
-	          <a href="https://www.google.com/maps/dir/SeaTac,+WA/Port+Townsend,+WA/@47.6734124,-123.1033013,9z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x54905b6cc75964d3:0x7822b21dad52b646!2m2!1d-122.2960726!2d47.4435903!1m5!1m1!1s0x548fe9a4d291b6fd:0xf5e669eab50680c0!2m2!1d-122.7604472!2d48.1170387!3e0">Click here</a>
+	          For map reference, check our the Google map 
+	          <a href="https://www.google.com/maps/dir/SeaTac,+WA/Port+Townsend,+WA/@47.6734124,-123.1033013,9z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x54905b6cc75964d3:0x7822b21dad52b646!2m2!1d-122.2960726!2d47.4435903!1m5!1m1!1s0x548fe9a4d291b6fd:0xf5e669eab50680c0!2m2!1d-122.7604472!2d48.1170387!3e0">here</a>.
           </p>
           <p>
-	          A good amount of time should be considered before the celebration itself in order to make it. We are willing and happy to help in any way to make it easier for any of you to plan this out and research busses, car rental, ferry schedules etc.
-          </p>
-          <p>
-            As for housing in Port Townsend, we have a couple of options (Steph’s boat, camping on our land and a couple of nice offers of awesome friends in town) but possibly not enough to satisfy all. We will try our best though. Let us know what you need and the date that you would like and we will help you by doing researches thru town.
+            As for housing in Port Townsend, we have a couple of options (Steph’s boat, camping on our land and a couple of nice offers from awesome friends in town) but possibly not enough to satisfy all. We will try our best though. Let us know what you need and the dates that you would like and we will help you by doing researches thru town.
           </p>
 
           <hr />
 
           <p>
-	          Pour tout ceux arrivant par avion, très probablement a l’aéroport SEATAC (Seattle and Tacoma airport): notez que Port Townsend est situé sur une péninsule (la péninsule Olympique) et que le trajet peut prendre beaucoup de temps entre l'aéroport SEATAC et Port Townsend, particulièrement si vous n’êtes pas au courant des horaires d’autobus et traversiers…
+	          Pour tout ceux arrivant par avion, très probablement a l’aéroport SEATAC (Seattle and Tacoma airport): notez que Port Townsend est situé sur une péninsule (la péninsule Olympique) et que le trajet peut prendre beaucoup de temps entre l'aéroport SEATAC et Port Townsend, particulièrement si vous n’êtes pas au courant des horaires d’autobus et traversiers… Nous somme heureux et prêt à vous aider à planifier votre trajet. 
           </p>
           <p>
-	          Pour reference, voici de quoi la carte a l’air entre SEATAC et Port Townsend:
-	          <a href="https://www.google.com/maps/dir/SeaTac,+WA/Port+Townsend,+WA/@47.6734124,-123.1033013,9z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x54905b6cc75964d3:0x7822b21dad52b646!2m2!1d-122.2960726!2d47.4435903!1m5!1m1!1s0x548fe9a4d291b6fd:0xf5e669eab50680c0!2m2!1d-122.7604472!2d48.1170387!3e0">Cliquez ici</a>
-          </p>
-          <p>
-	          Une periode de temps relativement longue devrait être considerée avant la celebration afin de s’y rendre. Nous sommes heureux et prêts a vous aider de differente facons afin de vous faciliter la tâche avec la recherche d’autobus, voiture de location, horaires de traversiers etc.
+	          Pour reference géographique, jetez un oeil à Google map
+	          <a href="https://www.google.com/maps/dir/SeaTac,+WA/Port+Townsend,+WA/@47.6734124,-123.1033013,9z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x54905b6cc75964d3:0x7822b21dad52b646!2m2!1d-122.2960726!2d47.4435903!1m5!1m1!1s0x548fe9a4d291b6fd:0xf5e669eab50680c0!2m2!1d-122.7604472!2d48.1170387!3e0">ici</a>.
           </p>
           <p>
 	          Quand à l’hébergement à Port Townsend, nous avons une coupe d’options (le bateau de Steph, camping sur notre terrain ainsi que deux offres très génereuses de bon amis ici) mais possiblement pas suffisamment pour subvenir à tous. Nous ferons notre possible ceci-dit. Dites-nous ce que vous avez besoin ainsi que les dates que vous aimeriez et on vous aidera en faisant quelque recherches en ville.
@@ -139,7 +144,12 @@
 					<h2>CONFIRM YOUR PRESENCE - CONFIRMER VOTRE PRÉSENCE</h2>
 					<p>
 					Please use this Google form to confirm your presence by clicking
-					<a href="https://docs.google.com/forms/d/1kwZ4b3sAckXJeA1g6ZfB1Du93Z5TwNulRwPujIAt6j8/edit">here</a>
+					<a href="https://docs.google.com/forms/d/1kwZ4b3sAckXJeA1g6ZfB1Du93Z5TwNulRwPujIAt6j8/edit">here</a>.
+					</p>
+					  <hr />
+					<p>
+					Veuillez remplir ce court sondage Google pour confirmer votre présence
+					<a href="https://docs.google.com/forms/d/1kwZ4b3sAckXJeA1g6ZfB1Du93Z5TwNulRwPujIAt6j8/edit">ici</a>.
 					</p>
 
 	        </div>
@@ -147,15 +157,23 @@
 	</div> <!--#rsvp-->
 
 	<div id="pictures">
+		<svg id="bicycleLeft" class="bicycle"></svg>
+
 		<div class="story"><div class="bg"></div>
 	    	<div class="float-right">
 
-					<h2>PICTURES OF OUR SMALL WEDDING ON MARCH 27TH 2016:</h2>
+					<h2>PICTURES OF MARCH 27TH 2016:</h2>
 
           <p>
-            <a href="https://www.flickr.com/photos/earthwandering/albums/72157666469547516">https://www.flickr.com/photos/earthwandering/albums/72157666469547516</a>
+          To see our Flickr album with the picture of our small Wedding on March 27th 2016, click 
+            <a href="https://www.flickr.com/photos/earthwandering/albums/72157666469547516">here</a>.
           </p>
-
+        	<hr />
+          <p>
+          Pour voir notre album photo Flickr de notre petit Mariage tenu le 27 Mars 2016, clickez 
+            <a href="https://www.flickr.com/photos/earthwandering/albums/72157666469547516">ici</a>.
+            </P
+            
 	        </div>
 	    </div> <!--.story-->
 	</div> <!--#rsvp-->
