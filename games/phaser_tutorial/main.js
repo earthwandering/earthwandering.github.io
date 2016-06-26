@@ -2,7 +2,7 @@
 var mainState = {
   preload: function() {
     // Load the bird sprite
-    game.load.image('bird', 'assets/bird.png');
+    game.load.image('bird', 'assets/ian2.png');
     game.load.image('pipe', 'assets/pipe.png');
     game.load.audio('jump', 'assets/jump.wav');
   },
