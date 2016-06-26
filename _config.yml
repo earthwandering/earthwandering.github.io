@@ -1,5 +1,4 @@
 name: Earth Wandering
-markdown: redcarpet
 pygments: true
 permalink: none
 excerpt_separator: <!--more-->
