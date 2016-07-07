@@ -23,7 +23,7 @@
 			function showjonscontact() {
 				var target = $('.jonscontact')
 				target.empty();
-				var e = 'jon garrison: ' + 'jon' + 'garrison' + '@' + 'gmail.com';
+				var e = 'Jon Garrison: ' + 'jon' + 'garrison' + '@' + 'gmail.com';
 				target.append(e);
 			}
 		</script>
@@ -33,34 +33,44 @@
   </head>
   <body>
 
-		<p>
-			The VicTownsend International Bike Loop is a bicycle touring route that loops through the following places:
-			<ul>
-				<li>Port Townsend, Washington</li>
-				<li>Sequim, Washington</li>
-				<li>Port Angeles, Washington</li>
-				<li>Victoria, British Columbia</li>
-				<li>Sydney, British Columbia</li>
-				<li>The San Juan Islands, Washington</li>
-				<li>Anacortes, Washington</li>
-				<li>Oak Harbor, Washington</li>
-			</ul>
-		</p>
+		<div class="container-fluid">
+			<h1>VicTownsend International Bike Loop Route</h1>
 
-		<p>
-		To get the contact info for the maintainer of this page <strong class="jonscontact" onclick="showjonscontact()">Click Here</strong>
-		</p>
+			<p>
+				The VicTownsend International Bike Loop is a bicycle touring route that loops through the following places:
+				<ul>
+					<li>Port Townsend, Washington</li>
+					<li>Sequim, Washington</li>
+					<li>Port Angeles, Washington</li>
+					<li>Victoria, British Columbia</li>
+					<li>Sydney, British Columbia</li>
+					<li>The San Juan Islands, Washington</li>
+					<li>Anacortes, Washington</li>
+					<li>Oak Harbor, Washington</li>
+				</ul>
+			</p>
 
-		<p>
-			<a href="https://www.google.com/maps/d/u/0/edit?hl=en&authuser=0&mid=1kT_8JarREyt9m-lo8Z4AYKMarZo">Direct Map Link</a>
-		</p>
+			<p>
+			To get the contact info for the maintainer of this page <strong class="jonscontact" onclick="showjonscontact()">Click Here</strong>
+			</p>
 
-		<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1kT_8JarREyt9m-lo8Z4AYKMarZo" width="640" height="480"></iframe>
+			<p>
+				<a href="https://www.google.com/maps/d/u/0/edit?hl=en&authuser=0&mid=1kT_8JarREyt9m-lo8Z4AYKMarZo">Direct Map Link</a>
+			</p>
 
+			<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1kT_8JarREyt9m-lo8Z4AYKMarZo" width="640" height="480"></iframe>
+		</div><!-- End container -->
+
+		<footer>
+			<a href="http://earthwandering.com">Earth Wandering</a>
+		</footer>
+
+		
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 <!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
   </body>
 </html>
