@@ -104,20 +104,30 @@ var mainState = {
 
   addRowOfPipes: function() {
     try {
+      if (!this.score) {
+        this.score = 0;
+      }
+      
       // Randomly pick a number between 1 and 5
       // This will be the hole position
-      var hole = Math.floor(Math.random() * 5) + 1;
   
       // Add the 6 pipes
       // With one big hole at position 'hole' and 'hole + 1'
-  
+
+      const totalHeight = 8;
+      
       console.log("score: " + this.score);
-      var holeSize = (this.score && this.score < 5) ? 6 - this.score : 3;
+      var holeSize = (this.score >= 0 && this.score < 5) ? 7 - this.score : 3;
       console.log("hole size: ", holeSize);
   
-      for (var i = 0; i < 8; i++)
-        if (i < hole || i > hole + holeSize) //the + number creates the gap
+      var hole = Math.floor(Math.random() * (totalHeight - holeSize)) + 0;  //+ 1
+  
+  
+      for (var i = 0; i < 8; i++) {
+        if (i <= hole || i > hole + holeSize) {
           this.addOnePipe(400, i * 60 + 10);
+        } //the + number creates the gap
+      }
   
       this.score += 1;
       this.labelScore.text = this.score;
