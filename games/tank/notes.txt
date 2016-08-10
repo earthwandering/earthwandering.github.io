@@ -1,0 +1,5 @@
+
+I had to install the latest Node to get this to work
+
+nvm use v6.3.1
+node server.js
