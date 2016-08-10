@@ -46,8 +46,8 @@ var mainState = {
     this.ball = game.add.sprite(200, 300, 'ball');
 
     // Give the ball some initial speed
-    this.ball.body.velocity.x = 300;
-    this.ball.body.velocity.y = 300;
+    this.ball.body.velocity.x = 200;
+    this.ball.body.velocity.y = 200;
 
     // Make sure the ball will bounce when hitting something
     this.ball.body.bounce.setTo(1);
