@@ -56,8 +56,8 @@ var mainState = {
 
   update: function() {
     // Move the paddle left/right when an arrow key is pressed
-    if (this.left.isDown) this.paddle.body.velocity.x = -300;
-    else if (this.right.isDown) this.paddle.body.velocity.x = 300;
+    if (this.left.isDown) this.paddle.body.velocity.x = -400;
+    else if (this.right.isDown) this.paddle.body.velocity.x = 400;
 
     // Stop the paddle when no key is pressed
     else this.paddle.body.velocity.x = 0;

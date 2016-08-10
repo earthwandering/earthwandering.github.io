@@ -111,7 +111,8 @@ var mainState = {
     // With one big hole at position 'hole' and 'hole + 1'
     
     var holeSize = (this.score < 5) ? 7 - this.score : 2;
-
+    console.log("hole size: ", holeSize);
+    
     for (var i = 0; i < 8; i++)
       if (i < hole || i > hole + holeSize) //the + number creates the gap
         this.addOnePipe(400, i * 60 + 10);
