@@ -117,14 +117,14 @@ var mainState = {
       const totalHeight = 8;
       
       console.log("score: " + this.score);
-      var holeSize = (this.score >= 0 && this.score < 5) ? 7 - this.score : 3;
+      var holeSize = (this.score > -1 && this.score < 5) ? 7 - this.score : 3;
       console.log("hole size: ", holeSize);
   
       var hole = Math.floor(Math.random() * (totalHeight - holeSize)) + 0;  //+ 1
   
   
       for (var i = 0; i < 8; i++) {
-        if (i <= hole || i > hole + holeSize) {
+        if (i <= hole || i >= hole + holeSize) {
           this.addOnePipe(400, i * 60 + 10);
         } //the + number creates the gap
       }
