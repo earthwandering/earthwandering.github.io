@@ -1,0 +1,160 @@
+<html>
+	<head>
+    <!--
+    Design inspired by:
+    https://ianlunn.co.uk/plugins/jquery-parallax/
+    -->
+
+
+		<meta charset="UTF-8">
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+								(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+							m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-78511496-1', 'auto');
+			ga('send', 'pageview');
+
+		</script>
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/jquery.parallax-1.1.3.js"></script>
+		<script type="text/javascript" src="scripts/jquery.localscroll-1.2.7-min.js"></script>
+		<script type="text/javascript" src="scripts/jquery.scrollTo-1.4.2-min.js"></script>
+
+    <script src="scripts/snap.svg.js"></script>
+    <script src="scripts/bicycle.js"></script>
+    <script src="scripts/bike_builder.js"></script>
+
+		<script type="text/javascript">		
+		$(document).ready(function(){
+			$('#nav').localScroll(800);
+	
+			//.parallax(xPosition, speedFactor, outerHeight) options:
+			//xPosition - Horizontal position of the element
+			//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+			//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+
+      var speedFactor = 0.8;
+
+			$('#event').parallax("50%", speedFactor);
+			$('#travel').parallax("50%", speedFactor);
+			$('.bg').parallax("50%", speedFactor);
+			$('#rsvp').parallax("50%", speedFactor);
+			$('#pictures').parallax("50%", speedFactor);
+
+			function runBicycle() {
+				var bp = bicycle.getBasicBikeParameters(10,10);
+				console.log("About to build bike with frameColor: " + bp.frameColor);
+				console.log("Xo: " + bp.Xo);
+				bicycle.makeBike(bp);
+			}
+
+		})
+		</script>
+	
+		<link rel="stylesheet" type="text/css" href="style.css" />
+			
+	</head>
+	<body>
+	
+    <ul id="nav">
+	    <li><a href="#photosaugust" title="Confirm Your Presence"><h3><br />Photos de notre party du 27 Août 2016</h3></a></li>
+	</ul>
+
+
+	<div id="intro">
+		<div class="story"><div class="bg"></div>
+
+			<div class="center">
+
+				<h2 id="topTitle">Célébration de Mariage de</h2>
+				<h1>Jon & Steph</h1>
+				
+				<h3>27 Août 2016</h3>
+
+			</div>
+		</div> <!--.story-->
+	</div> <!--#intro-->
+
+
+	<div id="event">
+		<div class="story"><div class="bg"></div>
+	    	<div class="float-right">
+					
+					<h2>Gros merci à tous ceux qui se sont joint à nous pour notre party de Mariage le 27 Août dernier. C'etais incroyable de tous vous voir, nous avons eu vraiment du fun!</h2>
+
+					<p>Nous aimerions remercier tous nos amis incroyables qui nous ont non seulement aidé à rendre ce party possible mais le rendre encore mieux qu'on pourvait l'immaginer.
+					</p>
+
+					<p>Entre l'aide pour pêcher des crabes, l'instalation du stéreo, les contributions en plats additionnel et bouteilles pour le bar, la construction de notre super jeu de "bean hole", les offres d'endroits où rester pour nos familles, le prêt de grand chaudrons et réchaud au propane, les courses de dernière minutes, ceux qui sont venu de très loin en avion et en voiture (depuis Québec, Ontario, Rhode Island, Connecticut et du Japon), l'installation du 27 au matin mais, le nettoyage du lendemain, tous pour avoir pris le temps de venir célébrer avec nous et plus encore…
+					</p>
+
+					<p><strong>Matt, Kristin, Kiyota, Chris, Eyler, Mack, Sara L, Carol, Jack, Robin, Lindsey, Dan W, Silas, Bekah, Keely, Chen, Normand, Mado, Eugénie, Sarah CP, Bruce, Esther, Tomoki, Luke, Kate, Daniel W, Aron, Lucas, Joanie & Nicolas
+
+					</p>
+					<p>MERCI!!!</strong>
+					</p>
+					<p>Nous avons également eu plusieur cadeaux très généreux et aimerions remercier les gens suivants:
+					</p>
+					<p><strong>Ruth, Mado & Normand, Carol & Jack, Chris & Hannah, Sarah & Eugénie C.P, Sara L, Eyler, Joe, Robin, Daniel W,  Mack &  Aliénor
+					</p>
+					<p>Ainsi que la personne mystérieuse qui a laissé une bonne bouteille de vin dans le yome :-)
+					</p>
+					<p>MERCI!!!</strong></p>
+
+
+
+
+        </div>
+    </div> <!--.story-->
+	</div> <!--#intro-->
+
+
+
+	<div id="photosaugust">
+		<div class="story"><div class="bg"></div>
+	    	<div class="float-right">
+	
+					<h2>Photos de notre mariage du 27 Août 2016</h2>
+					<p>Vous trouverez <a href="https://drive.google.com/folderview?id=0Bwr0qo7W7_mMRUhMOC0waEVLYkU&usp=sharing">ici</a> un dossier Google Drive avec des sous-dossiers au nom de tous ceux que nous avons remarqué qui ont pris des photos à notre mariage
+				(Chris, Sarah CP, Mado, Sara L, Keely, Esther et nous-mêmes).
+					</p>
+					<p>Nous aimerions vous inviter à uploader vos photos afin que tous puissent les voir :-) Nous allons uploader nos propres photos très bientôt également.
+					</p>
+					<p>Si nous avons oublié quelqu'un, svp créez un dossier à votre nom :-) Aussi, ça nous fera plaisir de vous aider si vous n'êtes pas familier avec Google Drive.
+					</p>
+			</div>
+	    </div> <!--.story-->
+	</div> <!--#photosaugust-->
+
+	<div id="pictures">
+
+		<div class="story"><div class="bg"></div>
+	    	<div class="float-right">
+
+					<h2>Photos du 27 Mars 2016:</h2>
+
+         Pour voir notre album photo Flickr de notre petit Mariage tenu le 27 Mars 2016, cliquez
+            <a href="https://www.flickr.com/photos/earthwandering/albums/72157666469547516">ici</a>.
+					</p>
+
+				</div>
+	    </div> <!--.story-->
+
+		<!--
+    <p>
+      <a href="#" onclick="javascript:runBicycle()">Jon thinks you should click this</a>
+    </p>
+		<svg id="bicycleLeft" class="bicycle"></svg>
+    -->
+
+	</div> <!--#photosaugust-->
+
+
+
+
+	</body>
+</html>
