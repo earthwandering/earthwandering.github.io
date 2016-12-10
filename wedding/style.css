@@ -113,17 +113,20 @@ h2{
 	margin: .05em;
 }
 
-#intro h2 {
-	color: #444444;
+#intro {
+    background: url(images/redballons.jpg) 50% 0 no-repeat fixed;
+    background-size: 100% auto;
+    margin: 0 auto;
+    padding: 0;
+    text-shadow: 2px 2px 4px #999999
 }
-
 
 #topTitle {
 	margin-top: 1.2em !important;
 }
 
 #event{
-    background:url(images/flowers_m.jpg) 50% 0 no-repeat fixed;
+    background:url(images/bunnynbear_sm.jpg) 50% 0 no-repeat fixed;
     background-size: 100% auto;
     margin: 0 auto;
     padding: 0;
@@ -136,8 +139,8 @@ h2{
     padding: 0;
 }
 
-#rsvp {
-    background: url(images/pin.png) 50% 0 no-repeat fixed;
+#photosaugust {
+    background: url(images/micparty_sm.jpg) 50% 0 no-repeat fixed;
     background-size: 100% auto;
     margin: 0 auto;
     padding: 0;
@@ -189,4 +192,8 @@ h2{
 
 .address{
 	font-weight: bold;
+}
+
+#photosaugust p {
+    margin-bottom: 4px;
 }
