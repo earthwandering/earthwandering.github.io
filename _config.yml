@@ -1,3 +1,5 @@
 name: Earth Wandering
 permalink: none
 excerpt_separator: <!--more-->
+gems:
+  - jekyll-redirect-from
