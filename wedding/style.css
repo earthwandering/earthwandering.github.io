@@ -56,12 +56,15 @@ h2{
     font-style:normal;
 }
 
+/* the . is reffering to class */
 .smallish{
     font-size: .6em;
     vertical-align: super;
 }
 
-#header h1, #pixels{
+/*the # refers to ID (only used once)*/
+/* two seperate selectors that will get the same styling. Header & its child h1s and the pixel ID*/
+  #header h1, #pixels{
     color: #48941A;
 }
 

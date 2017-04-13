@@ -9,22 +9,28 @@
 		<meta charset="UTF-8">
 
 		<script>
+			/*
+			this is the code for Google analytics
+			 */
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 								(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 							m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
 			ga('create', 'UA-78511496-1', 'auto');
 			ga('send', 'pageview');
-
 		</script>
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<!-- Code for the sliding effect in jquery, this one relys on previous line -->
 		<script type="text/javascript" src="scripts/jquery.parallax-1.1.3.js"></script>
+		<!-- Code for scrolling feature -->
 		<script type="text/javascript" src="scripts/jquery.localscroll-1.2.7-min.js"></script>
+		<!-- Code for scrolling feature -->
 		<script type="text/javascript" src="scripts/jquery.scrollTo-1.4.2-min.js"></script>
 
+    <!-- Code from library needed for the library for the bicycle  -->
     <script src="scripts/snap.svg.js"></script>
+    <!-- Code library for bicycle -->
     <script src="scripts/bicycle.js"></script>
     <script src="scripts/bike_builder.js"></script>
 
@@ -37,6 +43,7 @@
 			//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
 			//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
 
+      //Scrolling set up stuff
       var speedFactor = 0.8;
 
 			$('#event').parallax("50%", speedFactor);
@@ -45,7 +52,9 @@
 			$('#rsvp').parallax("50%", speedFactor);
 			$('#pictures').parallax("50%", speedFactor);
 
-			function runBicycle() {
+
+      //Just Jon's bicycle stuff from here on
+      function runBicycle() {
 				var bp = bicycle.getBasicBikeParameters(10,10);
 				console.log("About to build bike with frameColor: " + bp.frameColor);
 				console.log("Xo: " + bp.Xo);
@@ -54,7 +63,7 @@
 
 		})
 		</script>
-	
+	  <!-- href is link to a file in html, src is used in used in scrip tags, img tag and more-->
 		<link rel="stylesheet" type="text/css" href="style.css" />
 			
 	</head>
@@ -70,6 +79,7 @@
 		<div class="story"><div class="bg"></div>
 
 			<div class="center">
+        <!-- span tags allows you to select a certain area-->
 				<h1>Jon & Steph<span class="smallish">'s</span></h1>
 				<h2>Wedding Celebration</h2>
 				
