@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <title> Flappy Bird Clone </title>
+  <script type="text/javascript" src="assets/jquery.min.js"></script>
+  <script type="text/javascript" src="phaser.min.js"></script>
+  <script type="text/javascript" src="flappyPhase.js"></script>
+  <script type="text/javascript" src="birthdayGame.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css?family=Averia+Libre|Skranji" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" />
+  
+</head>
+
+<body>
+  <h1>Ian's Birthday Challenge</h1>
+
+  <div class="phase0 phase">
+    <h2>Happy Birthday Ian!</h2>
+    <img src="gifs/hamster.gif" />
+    
+    <a href="#" onclick="birthday.nextPhase();">I WANT A GIFT, NOT A GIF DAD!!!!!</a>
+    
+  </div>
+
+  <div class="phase1 phase" style="display: none;">
+    <h2>You ready for a challenge?</h2>
+    <img src="gifs/yes.gif" />
+  
+    <a href="#" onclick="birthday.nextPhase();">Ready!!!!!</a>
+  </div>
+
+  <div class="phase2 phase" style="display: none;">
+    <h2>Riddle: If two’s company and three’s a crowd, what are four and five?</h2>
+  
+    <p>
+      Answer:
+      <input id="input-crowd" size="3" />
+    </p>
+  
+    <a href="#" onclick="birthday.checkPhaseAnswer('#input-crowd', 9);">Check it!</a>
+  </div>
+
+  <div class="phase3 phase" style="display: none;">
+    <h2>Riddle: If there are 4 apples and you take away 3, how many do you have?</h2>
+  
+    <p>
+      Answer:
+      <input id="input-apples" size="3" />
+    </p>
+  
+    <a href="#" onclick="birthday.checkPhaseAnswer('#input-apples', 3, 'Wait how many did you take?!?!');">Check it!</a>
+  </div>
+
+  <div class="phase4 phase" style="display: none;">
+    <h2>Riddle: What has a thumb and four fingers but is not alive?</h2>
+  
+    <p>
+      Answer:
+      <select id="input-select">
+        <option>Michael Jackson</option>
+        <option>A glove</option>
+        <option>A car full of rude people</option>
+      </select>
+    </p>
+  
+    <a href="#" onclick="birthday.checkPhaseAnswer('#input-select', 'A glove', 'Are you really thinking about it?');">Check it!</a>
+  </div>
+
+  <div class="phase5 phase" style="display: none;">
+    <h2>Ok Dad, this is getting kind of lame.  Do you have a fun one?</h2>
+    <img src="gifs/badkick.gif" />
+  
+    <a href="#" onclick="birthday.nextPhase();">Fun one!</a>
+  </div>
+  
+  <div class="phase6 phase" style="display: none;">
+    <h1>Ok, here goes a fun one! Can you make it to level 8?!?!</h1>
+    <p>hint: Use the spacebar!</p>
+  
+    <div id="phaser-target"></div>
+  </div>
+
+  <div class="phase7 phase" style="display: none;">
+    <h2>You are the flappy bird master!!!</h2>
+
+    <img src="gifs/freakout.gif" />
+    
+    <h2>Are you ready for your gift (not a gif!)?</h2>
+
+    <a href="#" onclick="birthday.nextPhase();">Yeah, dude!</a>
+  </div>
+
+  <div class="phase8 phase" style="display: none;">
+    <h2>Are you sure?</h2>
+    <img src="gifs/tooexcited.gif" />
+  
+    <a href="#" onclick="birthday.nextPhase();">Yeah, seriously!</a>
+
+  </div>
+
+  <div class="phase9 phase" style="display: none;">
+    <h2>Ok, here it is!</h2>
+  
+    <h2>Let's go climbing at The Circuit on the next visit!</h2>
+
+    <div class="img-together">
+      <img src="gifs/climb2.gif" />
+      <img src="gifs/climb1.gif" />
+      <img src="gifs/climb3.gif" />
+      <img src="gifs/climb4.gif" />
+    </div>
+
+  </div>
+  
+
+</body>
+</html>
